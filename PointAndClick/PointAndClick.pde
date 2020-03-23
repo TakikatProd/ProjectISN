@@ -67,12 +67,8 @@ void RoomUpdate(){
   image(BG, 0, 0, width, height);
 }
 
-<<<<<<< HEAD
 void Load(){
   BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
   image(BG, 0, 0, width, height);
 
 }
-=======
-//test
->>>>>>> e2f1bb8d4e8b177827df1301a51fc7ad43299349
