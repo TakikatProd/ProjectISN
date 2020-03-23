@@ -1,9 +1,11 @@
 int facing = 0;
 int room = 1;
 PImage BG;
+PImage Door;
 
 void setup(){
   size(1600,900);
+  Door = loadImage("/Object/Interactible/Idle.png")
 }
 
 void draw(){
@@ -63,4 +65,10 @@ void keyPressed(){
 void RoomUpdate(){
   BG = loadImage("/Room_" + str(room) + "/Facing_" + str(facing) + ".png");
   image(BG, 0, 0, width, height);
+}
+
+void Load(){
+  BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
+  image(BG, 0, 0, width, height);
+
 }
