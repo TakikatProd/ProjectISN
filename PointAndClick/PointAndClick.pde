@@ -6,6 +6,7 @@ PImage Box;
 PImage Key;
 PImage Windows;
 PImage Curtains;
+PImage Personnage;
 
 
 void setup(){
