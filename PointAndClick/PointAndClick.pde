@@ -1,16 +1,16 @@
 int facing = 0;
 int room = 0;
 PImage BG;
-PImage Door; //id 1
-PImage Windows; //id 2
-PImage Curtains; //id 3
-PImage Box; //id 4
+PImage Door;
+PImage Windows; //id 1
+PImage Curtains; //id 2
+PImage Box; //id 3
 PImage Key; //id 20-30
 PImage Personnage;
 
 int[][][] Elements = 
 {
-  {{0},  {0},  {1,10,10,  1,10,10,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+  {{0},  {0},  {3,7,5,  3,7,6,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -83,6 +83,18 @@ void Load(){
   if(facing < 4){
     if(DoorMatrice[room][facing][0] != 0){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
+    }
+  }
+  if(Elements[room][facing][0] != 0){
+    for(int i = 0; i < Elements[room][facing].length; i = i + 3){
+      switch(Elements[room][facing][i]){
+        case(3):
+          image(Box, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 138, 100);
+        break;
+
+        default:
+        break;
+      }
     }
   }
 }
