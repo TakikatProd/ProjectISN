@@ -1,5 +1,5 @@
 int facing = 0;
-int room = 1;
+int room = 0;
 PImage BG;
 PImage Door; //id 1
 PImage Windows; //id 2
@@ -13,7 +13,7 @@ int[][][] Elements =
 };
 int[][][] DoorMatrice = 
 {
-  {{20,50,40},  {0}, {0}, {0}}
+  {{20,5,4},  {0}, {0}, {0}}
 };
 
 void setup(){
@@ -78,8 +78,10 @@ void keyPressed(){
 void Load(){
   //BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/FACING_" + str(facing) + ".png");
   //image(BG, 0, 0, width, height);
-  if(DoorMatrice[room][facing][0] != 0){
-    image(Door, DoorMatrice[room][facing][1], DoorMatrice[room][facing][2], 10, 20);
+  if(facing < 4){
+    if(DoorMatrice[room][facing][0] != 0){
+      image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
+    }
   }
 }
 
