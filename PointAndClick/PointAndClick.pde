@@ -4,6 +4,7 @@ PImage BG;
 PImage Door; //id 1
 PImage Windows; //id 2
 PImage Curtains; //id 3
+PImage Box; //id 4
 PImage Key; //id 20-30
 PImage Personnage;
 
