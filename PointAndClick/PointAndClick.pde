@@ -1,13 +1,20 @@
 int facing = 0;
 int room = 1;
 PImage BG;
-PImage Door;
-PImage Box;
-PImage Key;
-PImage Windows;
-PImage Curtains;
+PImage Door; //id 1
+PImage Windows; //id 2
+PImage Curtains; //id 3
+PImage Key; //id 20-30
 PImage Personnage;
 
+int[][][] Elements = 
+{
+  {{0},  {0},  {1,10,10,  1,10,10,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+};
+int[][][] DoorMatrice = 
+{
+  {{20,50,40},  {0}, {0}, {0}}
+};
 
 void setup(){
   size(1600,900);
@@ -69,9 +76,11 @@ void keyPressed(){
 }
 
 void Load(){
-  BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
-  image(BG, 0, 0, width, height);
-
+  //BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/FACING_" + str(facing) + ".png");
+  //image(BG, 0, 0, width, height);
+  if(DoorMatrice[room][facing][0] != 0){
+    image(Door, DoorMatrice[room][facing][1], DoorMatrice[room][facing][2], 10, 20);
+  }
 }
 
 void Tuto(){
