@@ -12,6 +12,7 @@ PImage Personnage;
 void setup(){
   size(1600,900);
   Door = loadImage("/Object/Interactible/Porte.png");
+  Box = loadImage("/Object/Others/Boite.png")
   //Travail de theophile
 }
 
