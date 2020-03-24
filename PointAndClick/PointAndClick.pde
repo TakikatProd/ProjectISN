@@ -29,14 +29,14 @@ void keyPressed(){
      if(facing < 4){
        facing += 4;
      }
-     RoomUpdate();
+     Load();
      break;
      
    case(DOWN):
      if(facing >= 4){
        facing -= 4;
      }
-     RoomUpdate();
+     Load();
      break;
      
     case(LEFT):
@@ -48,7 +48,7 @@ void keyPressed(){
      } else {
        facing++;
      }
-     RoomUpdate();
+     Load();
      break;
      
    case(RIGHT):
@@ -60,17 +60,12 @@ void keyPressed(){
      } else {
        facing--;
      }
-     RoomUpdate();
+     Load();
      break;
      
     default:
       break;
  }
-}
-
-void RoomUpdate(){
-  BG = loadImage("/Room_" + str(room) + "/Facing_" + str(facing) + ".png");
-  image(BG, 0, 0, width, height);
 }
 
 void Load(){
