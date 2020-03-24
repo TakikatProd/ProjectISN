@@ -10,7 +10,7 @@ PImage Personnage;
 
 int[][][] Elements = 
 {
-  {{0},  {0},  {3,7,5,  3,7,6,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+  {{0},  {0},  {3,28,20,  3,27,22,  3,29,22,  3,30,20,  3,30,18,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -89,7 +89,7 @@ void Load(){
     for(int i = 0; i < Elements[room][facing].length; i = i + 3){
       switch(Elements[room][facing][i]){
         case(3):
-          image(Box, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 138, 100);
+          image(Box, Elements[room][facing][i + 1] * 25, Elements[room][facing][i + 2] * 25, 68, 50);
         break;
 
         default:
