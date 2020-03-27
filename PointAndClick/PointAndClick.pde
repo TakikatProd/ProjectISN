@@ -6,7 +6,11 @@ PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
 PImage Key; //id 20-30
-PImage Personnage;
+PImage Personnage; //id 4
+
+PImage Tutorial_1;
+PImage Tutorial_2;
+PImage Tutorial_3;
 
 int[][][] Elements = 
 {
@@ -25,10 +29,9 @@ void setup(){
 }
 
 void draw(){
-  fill(255);
-  square(10,10,500);
-  fill(0);
-  text(str(facing), 20, 30);
+  if(Tuto){
+
+  }
 }
 
 void keyPressed(){
