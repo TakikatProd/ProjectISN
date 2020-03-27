@@ -121,7 +121,7 @@ void Load(){
   } else {
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Ceiling.png");
     rotate(PI/2 * (facing - 4));
-    background(0);
+    background(63,56,91);
     switch(facing){
       case(4):
         image(BG, 350, 0, 900, 900);
