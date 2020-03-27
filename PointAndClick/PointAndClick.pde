@@ -27,6 +27,9 @@ void setup(){
   size(1600,900);
   Door = loadImage("/Object/Interactible/Porte.png");
   Box = loadImage("/Object/Others/Boite.png");
+  Windows = loadImage("/Object/Others/Windows.png");
+  Curtains = loadImage("/Object/Others/Rideau.png");
+  
   //Travail de theophile
 }
 
