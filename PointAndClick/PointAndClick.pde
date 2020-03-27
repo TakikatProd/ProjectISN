@@ -8,11 +8,11 @@ PImage Box; //id 3
 PImage Key; //id 20-30
 PImage Personnage; //id 4
 
-PImage Tutorial_1;
-PImage Tutorial_2;
-PImage Tutorial_3;
+PImage[3] Tutorial;
 
 boolean Tuto = true;
+int PhaseTuto = 0;
+int Fade = 0;
 
 int[][][] Elements = 
 {
@@ -31,8 +31,32 @@ void setup(){
 }
 
 void draw(){
+  
+  //Fonction tutorial
   if(Tuto){
+    //Afficher l'image du tutorial
+    if(Fade == 0){
+      image(Tutorial[0],0,0);
+    }
     
+    //Changer de phase du tutorials
+    if(Fade > 30){
+      PhaseTuto++;
+      Fade = 0;
+      Change = false;
+      //Fin du tuto
+      if(PhaseTuto >= 3){
+        Tuto = false;
+      }
+    }
+
+    //Fade out
+    if(Change){
+      Fade++;
+      fill(0,10);
+      rect(0, 0, width, height);
+      return;
+    }
   }
 }
 
@@ -104,7 +128,8 @@ void Load(){
   }
 }
 
-void Tuto(){
-  //Boulot de max
-  //Si tu veux load des images fait le seulement dans la fonction
+void mousePressed() {
+  if(Tuto){
+    Change = true;
+  }
 }
