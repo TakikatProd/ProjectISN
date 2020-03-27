@@ -12,6 +12,8 @@ PImage Tutorial_1;
 PImage Tutorial_2;
 PImage Tutorial_3;
 
+boolean Tuto = true;
+
 int[][][] Elements = 
 {
   {{0},  {0},  {3,28,20,  3,27,22,  3,29,22,  3,30,20,  3,30,18,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
@@ -30,7 +32,7 @@ void setup(){
 
 void draw(){
   if(Tuto){
-
+    
   }
 }
 
