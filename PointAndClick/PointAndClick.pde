@@ -112,8 +112,6 @@ void keyPressed(){
 }
 
 void Load(){
-  //BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/FACING_" + str(facing) + ".png");
-  //image(BG, 0, 0, width, height);
   if(facing < 4){
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
     image(BG, 0, 0, width, height);
@@ -122,9 +120,25 @@ void Load(){
     }
   } else {
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Ceiling.png");
-    translate(450, 450);
     rotate(PI/2 * (facing - 4));
-    image(BG, 1350, 450, 900, 900);
+    background(0);
+    switch(facing){
+      case(4):
+        image(BG, 350, 0, 900, 900);
+      break;
+
+      case(5):
+        image(BG, 0, -1250, 900, 900);
+      break;
+
+      case(6):
+        image(BG, -1250, -900, 900, 900);
+      break;
+
+      case(7):
+        image(BG, -900, 350, 900, 900);
+      break;
+    }
   }
   if(Elements[room][facing][0] != 0){
     for(int i = 0; i < Elements[room][facing].length; i = i + 3){
