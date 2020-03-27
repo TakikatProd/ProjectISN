@@ -81,7 +81,7 @@ void keyPressed(){
      Load();
      break;
      
-    case(LEFT):
+   case(LEFT):
      if(facing >= 4){
       break;
      }
