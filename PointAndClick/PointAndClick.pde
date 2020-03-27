@@ -17,11 +17,11 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{0},  {0},  {3,28,20,  3,27,22,  3,29,22,  3,30,20,  3,30,18,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+  {{4,3,6,  2,4,2},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {2,1,1},  {2,1,1},  {2,1,1},  {2,1,1}}
 };
 int[][][] DoorMatrice = 
 {
-  {{20,5,4},  {0}, {0}, {0}}
+  {{20,7,6},  {0}, {0}, {0}}
 };
 
 void setup(){
@@ -30,6 +30,7 @@ void setup(){
   Box = loadImage("/Object/Others/Boite.png");
   Windows = loadImage("/Object/Others/Windows.png");
   Curtains = loadImage("/Object/Others/Rideau.png");
+  Personnage = loadImage("/Object/Others/Player.png");
   
   //Travail de theophile
 }
@@ -124,27 +125,36 @@ void Load(){
     background(63,56,91);
     switch(facing){
       case(4):
-        image(BG, 350, 0, 900, 900);
+        translate(350,0);
       break;
 
       case(5):
-        image(BG, 0, -1250, 900, 900);
+        translate(0,-1250);;
       break;
 
       case(6):
-        image(BG, -1250, -900, 900, 900);
+        translate(-1250,-900);
       break;
 
       case(7):
-        image(BG, -900, 350, 900, 900);
+        translate(-900,350);
       break;
     }
+    image(BG, 0, 0, 900, 900);
   }
   if(Elements[room][facing][0] != 0){
     for(int i = 0; i < Elements[room][facing].length; i = i + 3){
       switch(Elements[room][facing][i]){
         case(3):
-          image(Box, Elements[room][facing][i + 1] * 25, Elements[room][facing][i + 2] * 25, 68, 50);
+          image(Box, Elements[room][facing][i + 1] * 50 + 20, Elements[room][facing][i + 2] * 50, 136, 100);
+        break;
+
+        case(2):
+          image(Curtains, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 310);
+        break;
+
+        case(4):
+          image(Personnage, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 50, 112, 150);
         break;
 
         default:
