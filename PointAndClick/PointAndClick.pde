@@ -40,7 +40,7 @@ void draw(){
   if(Tuto){
     //Afficher l'image du tutorial
     if(Fade == 0){
-      image(Tutorial[0],0,0);
+      image(Tutorial[PhaseTuto],0,0);
     }
     
     //Changer de phase du tutorials
