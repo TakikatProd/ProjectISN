@@ -61,8 +61,9 @@ void draw(){
 }
 
 void keyPressed(){
- switch(keyCode){
-   
+
+  //Mouvement
+  switch(keyCode){
    case(UP):
      if(facing < 4){
        facing += 4;
