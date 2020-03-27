@@ -8,9 +8,10 @@ PImage Box; //id 3
 PImage Key; //id 20-30
 PImage Personnage; //id 4
 
-PImage[3] Tutorial;
+PImage[] Tutorial;
 
-boolean Tuto = true;
+boolean Tuto = false;
+boolean Change = false;
 int PhaseTuto = 0;
 int Fade = 0;
 
@@ -114,9 +115,16 @@ void Load(){
   //BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/FACING_" + str(facing) + ".png");
   //image(BG, 0, 0, width, height);
   if(facing < 4){
+    BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
+    image(BG, 0, 0, width, height);
     if(DoorMatrice[room][facing][0] != 0){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
     }
+  } else {
+    BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Ceiling.png");
+    translate(450, 450);
+    rotate(PI/2 * (facing - 4));
+    image(BG, 1350, 450, 900, 900);
   }
   if(Elements[room][facing][0] != 0){
     for(int i = 0; i < Elements[room][facing].length; i = i + 3){
