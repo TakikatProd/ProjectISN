@@ -5,12 +5,16 @@ PImage Door;
 PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
-PImage Key; //id 20-30
+PImage[] Key; //id 20-30
 PImage Personnage; //id 4
 
 PImage[] Tutorial;
 
+//Inventaire
+int[] Inventory = new int[9];
+boolean Inv = true;
 PImage SlotInventor;
+PImage[] Items = new PImage[21];
 
 boolean Tuto = false;
 boolean Change = false;
@@ -34,7 +38,9 @@ void setup(){
   Curtains = loadImage("/Object/Others/Rideau.png");
   Personnage = loadImage("/Object/Others/Player.png");
   SlotInventor = loadImage("/Inventor/Box.png");
-  
+
+  Items[20] = loadImage("/Inventor/Items/Key.png");
+  InventoryAdd(20);
   //Travail de theophile
 }
 
@@ -109,6 +115,11 @@ void keyPressed(){
      }
      Load();
      break;
+
+    case(TAB):
+      Inv = !Inv;
+      Load();
+      break;
      
     default:
       break;
@@ -132,7 +143,7 @@ void Load(){
       break;
 
       case(5):
-        translate(0,-1250);;
+        translate(0,-1250);
       break;
 
       case(6):
@@ -165,10 +176,35 @@ void Load(){
       }
     }
   }
+  rotate(0);
+  translate(0,0);
+  if(Inv){
+    InventoryPrint();
+  }
 }
 
 void mousePressed() {
   if(Tuto){
     Change = true;
+  }
+}
+
+void InventoryPrint(){
+  for (int i = 0; i < 9; i++) {
+    image(SlotInventor,1505, (i*100)+5, 90, 90);
+    if(Inventory[i] != 0){
+      image(Items[Inventory[i]], 1515, i*100+15, 70, 70);
+    }
+  }
+
+
+}
+
+void InventoryAdd(int id){
+  for(int i = 0; i < 9; i++){
+    if(Inventory[i] == 0){
+      Inventory[i] = id;
+      return;
+    }
   }
 }
