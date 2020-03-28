@@ -10,6 +10,8 @@ PImage Personnage; //id 4
 
 PImage[] Tutorial;
 
+PImage SlotInventor;
+
 boolean Tuto = false;
 boolean Change = false;
 int PhaseTuto = 0;
@@ -31,6 +33,7 @@ void setup(){
   Windows = loadImage("/Object/Others/Windows.png");
   Curtains = loadImage("/Object/Others/Rideau.png");
   Personnage = loadImage("/Object/Others/Player.png");
+  SlotInventor = loadImage("/Inventor/Box.png");
   
   //Travail de theophile
 }
