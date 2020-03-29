@@ -190,6 +190,26 @@ void mousePressed() {
 }
 
 void InventoryPrint(){
+  if(facing >= 4){
+    switch(facing){
+      case(4):
+        translate(-350,0);
+      break;
+
+      case(5):
+        translate(0,1250);
+      break;
+
+      case(6):
+        translate(1250,900);
+      break;
+
+      case(7):
+        translate(900,-350);
+      break;
+    }
+    rotate(PI/2 * (4 - facing - 4));
+  }
   for (int i = 0; i < 9; i++) {
     image(SlotInventor,1505, (i*100)+5, 90, 90);
     if(Inventory[i] != 0){
