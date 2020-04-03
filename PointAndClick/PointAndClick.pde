@@ -5,7 +5,7 @@ PImage Door;
 PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
-PImage[] Key; //id 20-30
+PImage[] Key = new PImage[20]; //id 20-30
 PImage Personnage; //id 4
 
 PImage[] Tutorial;
@@ -16,6 +16,10 @@ boolean Inv = true;
 PImage SlotInventor;
 PImage[] Items = new PImage[21];
 
+//hitbox
+int[][] Hitbox = new int[10][5];
+int NbElements = 0;
+
 boolean Tuto = false;
 boolean Change = false;
 int PhaseTuto = 0;
@@ -23,7 +27,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {2,1,1},  {2,1,1},  {2,1,1},  {2,1,1}}
+  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {2,1,1},  {2,1,1},  {2,1,1},  {2,1,1}}
 };
 int[][][] DoorMatrice = 
 {
@@ -40,6 +44,7 @@ void setup(){
   SlotInventor = loadImage("/Inventor/Box.png");
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
+  Key[0] = loadImage("/Inventor/Items/Key.png");
   InventoryAdd(20);
   //Travail de theophile
 }
@@ -127,6 +132,7 @@ void keyPressed(){
 }
 
 void Load(){
+  NbElements = 0;
   if(facing < 4){
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
     image(BG, 0, 0, width, height);
@@ -171,6 +177,11 @@ void Load(){
           image(Personnage, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 50, 112, 150);
         break;
 
+        case(20):
+          image(Key[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 20);
+        break;
+
         default:
         break;
       }
@@ -186,6 +197,15 @@ void Load(){
 void mousePressed() {
   if(Tuto){
     Change = true;
+  }
+  //hitboxe
+  for(int i = 0; i < NbElements; i++){
+    if(mouseX > Hitbox[i][0] && mouseX < (Hitbox[i][0] + Hitbox[i][2])){
+      if(mouseY > Hitbox[i][1] && mouseY < (Hitbox[i][1] + Hitbox[i][3])){
+        OnHitbox(Hitbox[i][4]);
+        Load();
+      }
+    }
   }
 }
 
@@ -206,5 +226,32 @@ void InventoryAdd(int id){
       Inventory[i] = id;
       return;
     }
+  }
+}
+
+void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
+  Hitbox[NbElements][0] = posx;
+  Hitbox[NbElements][1] = posy;
+  Hitbox[NbElements][2] = sizex;
+  Hitbox[NbElements][3] = sizey;
+  Hitbox[NbElements][4] = id;
+  NbElements++;
+}
+
+void OnHitbox(int id){
+  switch(id){
+    case(20):
+      InventoryAdd(20);
+      for(int i = 0; i < Elements[room][facing].length; i = i + 3){
+        if(Elements[room][facing][i] == 20){
+          Elements[room][facing][i] = 0;
+          Elements[room][facing][i+1] = 0;
+          Elements[room][facing][i+2] = 0;
+        }
+      }
+    break;
+
+    default: 
+    break;
   }
 }
