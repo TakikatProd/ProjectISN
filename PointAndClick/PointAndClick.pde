@@ -8,6 +8,7 @@ PImage Curtains; //id 2
 PImage Box; //id 3
 PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
+PImage Cursor;
 
 PImage[] Tutorial;
 
@@ -46,10 +47,13 @@ void setup(){
   Curtains = loadImage("/Object/Others/Rideau.png");
   Personnage = loadImage("/Object/Others/Player.png");
   SlotInventor = loadImage("/Inventor/Box.png");
+  Cursor = loadImage("/Others/idle_cursor.png");
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
   InventoryAdd(20);
+
+  cursor(Cursor, 16, 16);
 }
 
 void draw(){
@@ -297,7 +301,7 @@ void OnHitbox(int id){
       InventoryAdd(20);
       DeleteElemntsById(20);
     break;
-    
+
     default:
     break;
   }
