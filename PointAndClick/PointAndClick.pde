@@ -315,6 +315,24 @@ void OnHitbox(int id){
     InventoryAdd(id);
     DeleteElementsById(id);
   }
+  if(id <= 59 && id >= 40){
+    if(SelectItem != 10){
+      if(Inventory[SelectItem] == id - 20){
+        switch(DoorMatrice[room][facing][0]){
+          case(40):
+            DoorMatrice[room][facing][0] = 61;
+          break;
+          
+          default:
+          break;
+
+        }
+      }
+    }
+  }
+  if(id <= 79 && id >= 60){
+    room = id - 60;
+  }
 }
 
 void DeleteElementsById(int id){
