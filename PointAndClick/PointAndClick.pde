@@ -297,8 +297,16 @@ void OnHitbox(int id){
       InventoryAdd(20);
       DeleteElemntsById(20);
     break;
+    case(41):
 
-    default: 
+    break;
+    case(42):
+
+    break;
+    case(43):
+
+    break;
+    default:
     break;
   }
 }
