@@ -87,7 +87,6 @@ void draw(){
 }
 
 void keyPressed(){
-
   //Mouvement
   switch(keyCode){
    case(UP):
@@ -144,10 +143,15 @@ void Load(){
   if(facing < 4){
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
     image(BG, 0, 0, width, height);
-    if(DoorMatrice[room][facing][0] != 0){
+    if(DoorMatrice[room][facing][0] >= 40 && DoorMatrice[room][facing][0] < 60){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
       AddHitbox(DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200, DoorMatrice[room][facing][0]);
     }
+    if(DoorMatrice[room][facing][0] >= 60 && DoorMatrice[room][facing][0] < 80){
+      image(OpenDoor, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
+      AddHitbox(DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200, DoorMatrice[room][facing][0]);
+    }
+    
   } else {
     //Ceiling
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Ceiling.png");
