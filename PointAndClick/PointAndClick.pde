@@ -35,7 +35,7 @@ int[][][] Elements =
 };
 int[][][] DoorMatrice = 
 {
-  {{20,7,6},  {0}, {0}, {0}}
+  {{40,7,6},  {0}, {0}, {0}}
 };
 
 void setup(){
@@ -145,6 +145,7 @@ void Load(){
     image(BG, 0, 0, width, height);
     if(DoorMatrice[room][facing][0] != 0){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
+      AddHitbox(DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200, DoorMatrice[room][facing][0]);
     }
   } else {
     //Ceiling
@@ -309,18 +310,13 @@ void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
 }
 
 void OnHitbox(int id){
-  switch(id){
-    case(20):
-      InventoryAdd(20);
-      DeleteElemntsById(20);
-    break;
-
-    default:
-    break;
+  if(id <= 39 && id >= 20){
+    InventoryAdd(id);
+    DeleteElementsById(id);
   }
 }
 
-void DeleteElemntsById(int id){
+void DeleteElementsById(int id){
   if(facing < 4){
         for(int i = 0; i < Elements[room][facing].length; i = i + 3){
           if(Elements[room][facing][i] == id){
