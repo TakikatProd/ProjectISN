@@ -226,6 +226,7 @@ void mousePressed() {
     }
   }
   SelectItem = 10;
+  cursor(Cursor, 16, 16);
 }
 
 void InventoryPrint(){
