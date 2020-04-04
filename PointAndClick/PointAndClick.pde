@@ -42,7 +42,7 @@ void setup(){
   size(1600,900);
   //Load Picture
   Door = loadImage("/Object/Interactible/Porte.png");
-  OpenDoor = loadImage("/Objects/Interactible/OpenDoor.png");
+  OpenDoor = loadImage("/Object/Interactible/OpenDoor.png");
   Box = loadImage("/Object/Others/Boite.png");
   Windows = loadImage("/Object/Others/Windows.png");
   Curtains = loadImage("/Object/Others/Rideau.png");
@@ -52,7 +52,6 @@ void setup(){
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
-  InventoryAdd(20);
 
   cursor(Cursor, 16, 16);
   Load();
@@ -311,7 +310,6 @@ void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
     Hitbox[NbElements][3] = sizey;
   }
   Hitbox[NbElements][4] = id;
-  println(Hitbox[NbElements]);
   NbElements++;
 }
 
