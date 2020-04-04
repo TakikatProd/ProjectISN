@@ -53,7 +53,6 @@ void setup(){
 }
 
 void draw(){
-  
   //Fonction tutorial
   if(Tuto){
     //Afficher l'image du tutorial
@@ -182,13 +181,12 @@ void Load(){
           image(Personnage, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 50, 112, 150);
         break;
 
-        case(20):
-          image(Key[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
-          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 20);
-        break;
-
         default:
         break;
+      }
+      if(Elements[room][facing][i] >= 20 && Elements[room][facing][i] < 40){
+        image(Key[Elements[room][facing][i] - 20], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+        AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, Elements[room][facing][i]);
       }
     }
   }
