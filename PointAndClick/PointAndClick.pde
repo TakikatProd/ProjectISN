@@ -210,6 +210,18 @@ void mousePressed() {
       }
     }
   }
+  for(int i = 0; i < 9; i++){
+    if(mouseX > 1505 && mouseX < 1595){
+      if(mouseY > 100 * i + 5 && mouseY < 100 * i + 105){
+        if(Inventory[i] != 0){
+          SelectItem = i;
+          cursor(Items[Inventory[i]],0,0);
+          return;
+        }
+      }
+    }
+  }
+  SelectItem = 10;
 }
 
 void InventoryPrint(){
@@ -297,7 +309,7 @@ void OnHitbox(int id){
       InventoryAdd(20);
       DeleteElemntsById(20);
     break;
-    
+
     default:
     break;
   }
