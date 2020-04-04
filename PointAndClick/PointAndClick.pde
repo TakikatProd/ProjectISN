@@ -1,11 +1,12 @@
 int facing = 0;
 int room = 0;
 PImage BG;
-PImage Door;
+PImage Door; //id 20-40
+PImage OpenDoor; id 41-60
 PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
-PImage[] Key = new PImage[20]; //id 20-30
+PImage[] Key = new PImage[20]; //id 20-40
 PImage Personnage; //id 4
 
 PImage[] Tutorial;
