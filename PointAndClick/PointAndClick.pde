@@ -54,6 +54,7 @@ void setup(){
   InventoryAdd(20);
 
   cursor(Cursor, 16, 16);
+  Load();
 }
 
 void draw(){
