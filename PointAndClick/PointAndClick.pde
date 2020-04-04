@@ -17,6 +17,8 @@ boolean Inv = true;
 PImage SlotInventor;
 PImage[] Items = new PImage[21];
 
+int SelectItem = 10;
+
 //hitbox
 int[][] Hitbox = new int[10][5];
 int NbElements = 0;
@@ -28,7 +30,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {2,1,1},  {2,1,1},  {2,1,1},  {2,1,1}}
+  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {20,1,1},  {20,1,1},  {20,1,1},  {20,1,1}}
 };
 int[][][] DoorMatrice = 
 {
@@ -37,6 +39,7 @@ int[][][] DoorMatrice =
 
 void setup(){
   size(1600,900);
+  //Load Picture
   Door = loadImage("/Object/Interactible/Porte.png");
   Box = loadImage("/Object/Others/Boite.png");
   Windows = loadImage("/Object/Others/Windows.png");
@@ -47,7 +50,6 @@ void setup(){
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
   InventoryAdd(20);
-  //Travail de theophile
 }
 
 void draw(){
@@ -134,6 +136,7 @@ void keyPressed(){
 
 void Load(){
   NbElements = 0;
+  //Door
   if(facing < 4){
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
     image(BG, 0, 0, width, height);
@@ -141,6 +144,7 @@ void Load(){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
     }
   } else {
+    //Ceiling
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Ceiling.png");
     rotate(PI/2 * (facing - 4));
     background(63,56,91);
@@ -251,11 +255,41 @@ void InventoryAdd(int id){
 }
 
 void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
-  Hitbox[NbElements][0] = posx;
-  Hitbox[NbElements][1] = posy;
-  Hitbox[NbElements][2] = sizex;
-  Hitbox[NbElements][3] = sizey;
+  //Ceiling
+  if(facing >= 4){
+    if(facing == 4){
+      Hitbox[NbElements][0] = posx + 350;
+      Hitbox[NbElements][1] = posy;
+      Hitbox[NbElements][2] = sizex;
+      Hitbox[NbElements][3] = sizey;
+    }
+    if(facing == 5){
+      Hitbox[NbElements][0] = 1250 - posy - sizey;
+      Hitbox[NbElements][1] = posx;
+      Hitbox[NbElements][2] = sizex;
+      Hitbox[NbElements][3] = sizey;
+    }
+    if(facing == 6){
+      Hitbox[NbElements][0] = 1250 - posx - sizex;
+      Hitbox[NbElements][1] = 900 - posy - sizey;
+      Hitbox[NbElements][2] = sizey;
+      Hitbox[NbElements][3] = sizex;
+    }
+    if(facing == 7){
+      Hitbox[NbElements][0] = posy + 350;
+      Hitbox[NbElements][1] = 900 - posx - sizex;
+      Hitbox[NbElements][2] = sizey;
+      Hitbox[NbElements][3] = sizex;
+    }
+  } else {
+    //No Ceiling
+    Hitbox[NbElements][0] = posx;
+    Hitbox[NbElements][1] = posy;
+    Hitbox[NbElements][2] = sizex;
+    Hitbox[NbElements][3] = sizey;
+  }
   Hitbox[NbElements][4] = id;
+  println(Hitbox[NbElements]);
   NbElements++;
 }
 
@@ -263,13 +297,7 @@ void OnHitbox(int id){
   switch(id){
     case(20):
       InventoryAdd(20);
-      for(int i = 0; i < Elements[room][facing].length; i = i + 3){
-        if(Elements[room][facing][i] == 20){
-          Elements[room][facing][i] = 0;
-          Elements[room][facing][i+1] = 0;
-          Elements[room][facing][i+2] = 0;
-        }
-      }
+      DeleteElemntsById(20);
     break;
     case(41):
 
@@ -283,4 +311,33 @@ void OnHitbox(int id){
     default:
     break;
   }
+}
+
+void DeleteElemntsById(int id){
+  if(facing < 4){
+        for(int i = 0; i < Elements[room][facing].length; i = i + 3){
+          if(Elements[room][facing][i] == id){
+            Elements[room][facing][i] = 0;
+            Elements[room][facing][i+1] = 0;
+            Elements[room][facing][i+2] = 0;
+          }
+        }
+      } else {
+        for(int i = 0; i < Elements[room][4].length; i = i + 3){
+          if(Elements[room][4][i] == id){
+            Elements[room][4][i] = 0;
+            Elements[room][4][i+1] = 0;
+            Elements[room][4][i+2] = 0;
+            Elements[room][5][i] = 0;
+            Elements[room][5][i+1] = 0;
+            Elements[room][5][i+2] = 0;
+            Elements[room][6][i] = 0;
+            Elements[room][6][i+1] = 0;
+            Elements[room][6][i+2] = 0;
+            Elements[room][7][i] = 0;
+            Elements[room][7][i+1] = 0;
+            Elements[room][7][i+2] = 0;
+          }
+        }
+      }
 }
