@@ -1,12 +1,12 @@
 int facing = 0;
 int room = 0;
 PImage BG;
-PImage Door; //id 20-40
-PImage OpenDoor; id 41-60
+PImage Door; //id 40-59
+PImage OpenDoor; //id 60-79
 PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
-PImage[] Key = new PImage[20]; //id 20-40
+PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
 
 PImage[] Tutorial;
@@ -271,8 +271,16 @@ void OnHitbox(int id){
         }
       }
     break;
+    case(41):
 
-    default: 
+    break;
+    case(42):
+
+    break;
+    case(43):
+
+    break;
+    default:
     break;
   }
 }
