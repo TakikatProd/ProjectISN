@@ -42,6 +42,7 @@ void setup(){
   size(1600,900);
   //Load Picture
   Door = loadImage("/Object/Interactible/Porte.png");
+  OpenDoor = loadImage("/Objects/Interactible/OpenDoor.png");
   Box = loadImage("/Object/Others/Boite.png");
   Windows = loadImage("/Object/Others/Windows.png");
   Curtains = loadImage("/Object/Others/Rideau.png");
