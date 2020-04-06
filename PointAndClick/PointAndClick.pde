@@ -10,7 +10,7 @@ PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
 PImage Cursor;
 
-PImage[] Tutorial = new PImage[3];;
+PImage[] Tutorial = new PImage[3];
 
 //Inventaire
 int[] Inventory = new int[9];
@@ -82,7 +82,7 @@ void draw(){
     //Fade out
     if(Change){
       Fade++;
-      fill(0,10);
+      fill(0,20);
       rect(0, 0, width, height);
       return;
     }
