@@ -51,6 +51,7 @@ void setup(){
   Cursor = loadImage("/Others/idle_cursor.png");
   Tutorial[0] = loadImage("/Others/tuto1.png");
   Tutorial[1] = loadImage("/Others/tuto2.png");
+  Tutorial[2] = loadImage("/Others/tuto3.png");
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
@@ -73,7 +74,7 @@ void draw(){
       Fade = 0;
       Change = false;
       //Fin du tuto
-      if(PhaseTuto >= 2){
+      if(PhaseTuto >= 3){
         Tuto = false;
         Load();
       }
