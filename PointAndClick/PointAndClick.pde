@@ -10,11 +10,11 @@ PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
 PImage Cursor;
 
-PImage[] Tutorial;
+PImage[] Tutorial = new PImage[3];;
 
 //Inventaire
 int[] Inventory = new int[9];
-boolean Inv = true;
+boolean Inv = false;
 PImage SlotInventor;
 PImage[] Items = new PImage[21];
 
@@ -24,14 +24,14 @@ int SelectItem = 10;
 int[][] Hitbox = new int[10][5];
 int NbElements = 0;
 
-boolean Tuto = false;
+boolean Tuto = true;
 boolean Change = false;
 int PhaseTuto = 0;
 int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {20,1,1},  {20,1,1},  {20,1,1},  {20,1,1}}
+  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -49,6 +49,8 @@ void setup(){
   Personnage = loadImage("/Object/Others/Player.png");
   SlotInventor = loadImage("/Inventor/Box.png");
   Cursor = loadImage("/Others/idle_cursor.png");
+  Tutorial[0] = loadImage("/Others/tuto1.png");
+  Tutorial[1] = loadImage("/Others/tuto2.png");
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
@@ -71,8 +73,9 @@ void draw(){
       Fade = 0;
       Change = false;
       //Fin du tuto
-      if(PhaseTuto >= 3){
+      if(PhaseTuto >= 2){
         Tuto = false;
+        Load();
       }
     }
 
