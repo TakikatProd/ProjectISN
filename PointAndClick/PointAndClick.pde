@@ -9,8 +9,12 @@ PImage Curtains; //id 2
 PImage Box; //id 3
 PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
-//Special Item
 
+//Special Item
+PImage Lamp[] = new PImage[3]; //id 80
+
+//Special var
+boolean Light = false;
 
 //Tutorial
 PImage[] Tutorial = new PImage[3];
