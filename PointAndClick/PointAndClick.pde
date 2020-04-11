@@ -1,6 +1,7 @@
 int facing = 0;
 int room = 0;
 PImage BG;
+//Item
 PImage Door; //id 40-59
 PImage OpenDoor; //id 60-79
 PImage Windows; //id 1
@@ -8,8 +9,10 @@ PImage Curtains; //id 2
 PImage Box; //id 3
 PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
-PImage Cursor;
+//Special Item
 
+
+//Tutorial
 PImage[] Tutorial = new PImage[3];
 
 //Inventaire
@@ -19,6 +22,8 @@ PImage SlotInventor;
 PImage[] Items = new PImage[21];
 
 int SelectItem = 10;
+
+PImage Cursor;
 
 //hitbox
 int[][] Hitbox = new int[10][5];
@@ -31,7 +36,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {0},  {0},  {0},  {0},  {0}}
+  {{4,3,6,  2,4,2},  {1,4,4},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -143,10 +148,11 @@ void keyPressed(){
 
 void Load(){
   NbElements = 0;
-  //Door
   if(facing < 4){
+    //Background
     BG = loadImage("/Rooms" + "/ROOM_" + str(room) + "/Facing_" + str(facing) + ".png");
     image(BG, 0, 0, width, height);
+    //Door
     if(DoorMatrice[room][facing][0] >= 40 && DoorMatrice[room][facing][0] < 60){
       image(Door, DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200);
       AddHitbox(DoorMatrice[room][facing][1] * 100, DoorMatrice[room][facing][2] * 100, 164, 200, DoorMatrice[room][facing][0]);
@@ -180,6 +186,7 @@ void Load(){
     }
     image(BG, 0, 0, 900, 900);
   }
+  //Elements
   if(Elements[room][facing][0] != 0){
     for(int i = 0; i < Elements[room][facing].length; i = i + 3){
       switch(Elements[room][facing][i]){
@@ -193,6 +200,10 @@ void Load(){
 
         case(4):
           image(Personnage, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 50, 112, 150);
+        break;
+
+        case(1):
+          image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
         break;
 
         default:
@@ -328,6 +339,7 @@ void OnHitbox(int id){
         switch(DoorMatrice[room][facing][0]){
           case(40):
             DoorMatrice[room][facing][0] = 61;
+            Inventory[SelectItem] = 0;
           break;
           
           default:
