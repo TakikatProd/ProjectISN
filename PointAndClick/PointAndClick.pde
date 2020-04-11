@@ -36,7 +36,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {0},  {0},  {0},  {0},  {0}}
+  {{4,3,6,  2,4,2,  20,1,1},  {1,4,4},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -200,6 +200,10 @@ void Load(){
 
         case(4):
           image(Personnage, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 50, 112, 150);
+        break;
+
+        case(1):
+          image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
         break;
 
         default:
