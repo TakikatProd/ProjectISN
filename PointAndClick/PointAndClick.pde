@@ -31,7 +31,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2,  20,1,1},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+  {{4,3,6,  2,4,2},  {0},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -199,8 +199,8 @@ void Load(){
         break;
       }
       if(Elements[room][facing][i] >= 20 && Elements[room][facing][i] < 40){
-        image(Key[Elements[room][facing][i] - 20], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
-        AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, Elements[room][facing][i]);
+        image(Key[Elements[room][facing][i] - 20], Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50);
+        AddHitbox(Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50, Elements[room][facing][i]);
       }
     }
   }
