@@ -31,7 +31,7 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2,  20,1,1},  {1,2,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
+  {{4,3,6,  2,4,2,  20,1,1},  {1,4,4},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,10,10},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -48,7 +48,6 @@ void setup(){
   Curtains = loadImage("/Object/Others/Rideau.png");
   Personnage = loadImage("/Object/Others/Player.png");
   SlotInventor = loadImage("/Inventor/Box.png");
-  Windows = loadImage("/Object/Others/Windows.png")
   Cursor = loadImage("/Others/idle_cursor.png");
   Tutorial[0] = loadImage("/Others/tuto1.png");
   Tutorial[1] = loadImage("/Others/tuto2.png");
@@ -197,7 +196,7 @@ void Load(){
         break;
 
         case(1):
-          image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 5, 85, 105)
+          image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
         break;
 
         default:
