@@ -382,6 +382,23 @@ void OnHitbox(int id){
   if(id <= 79 && id >= 60){
     room = id - 60;
   }
+  switch(id){
+
+    case(80):
+      InventoryAdd(21);
+      for(int i = 0; i < Elements[room][4].length; i = i + 3){
+          if(Elements[room][4][i] == 80){
+            Elements[room][4][i] = 81;
+            Elements[room][5][i] = 81;
+            Elements[room][6][i] = 81;
+            Elements[room][7][i] = 81;
+          }
+        }
+    break;
+
+    default:
+    break;
+  }
 }
 
 void DeleteElementsById(int id){
