@@ -64,6 +64,10 @@ void setup(){
   Tutorial[0] = loadImage("/Others/tuto1.png");
   Tutorial[1] = loadImage("/Others/tuto2.png");
   Tutorial[2] = loadImage("/Others/tuto3.png");
+  LampKey[0] = loadImage("/Object/Others/Lamp/Lamp.png");
+  LampKey[1] = loadImage("/Object/Others/Lamp/Lamp_On_key.png");
+  Lamp[0] = LampKey[0];
+  Lamp[1] = loadImage("/Object/Others/Lamp/Lamp_On.png"); 
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -215,6 +219,25 @@ void Load(){
           image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
         break;
 
+        case(80):
+          if(Light){
+            image(LampKey[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          else{
+            image(LampKey[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 80);
+        break;
+
+        case(81):
+          if(Light){
+            image(Lamp[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          else{
+            image(Lamp[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+        break;
+
         default:
         break;
       }
@@ -360,6 +383,23 @@ void OnHitbox(int id){
   }
   if(id <= 79 && id >= 60){
     room = id - 60;
+  }
+  switch(id){
+
+    case(80):
+      InventoryAdd(21);
+      for(int i = 0; i < Elements[room][4].length; i = i + 3){
+          if(Elements[room][4][i] == 80){
+            Elements[room][4][i] = 81;
+            Elements[room][5][i] = 81;
+            Elements[room][6][i] = 81;
+            Elements[room][7][i] = 81;
+          }
+        }
+    break;
+
+    default:
+    break;
   }
 }
 
