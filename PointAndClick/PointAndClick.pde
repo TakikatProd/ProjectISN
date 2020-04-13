@@ -11,7 +11,8 @@ PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
 
 //Special Item
-PImage Lamp[] = new PImage[3]; //id 80
+PImage LampKey[] = new PImage[2];//id 80
+PImage Lamp[] = new PImage[2]; //id 81
 
 //Special var
 boolean Light = false;
