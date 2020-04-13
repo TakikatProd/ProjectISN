@@ -24,7 +24,7 @@ PImage[] Tutorial = new PImage[3];
 int[] Inventory = new int[9];
 boolean Inv = false;
 PImage SlotInventor;
-PImage[] Items = new PImage[21];
+PImage[] Items = new PImage[40];
 
 int SelectItem = 10;
 
