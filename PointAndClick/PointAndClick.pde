@@ -64,6 +64,10 @@ void setup(){
   Tutorial[0] = loadImage("/Others/tuto1.png");
   Tutorial[1] = loadImage("/Others/tuto2.png");
   Tutorial[2] = loadImage("/Others/tuto3.png");
+  LampKey[0] = loadImage("/Object/Others/Lamp/Lamp.png");
+  LampKey[1] = loadImage("/Object/Others/Lamp/Lamp_On_key.png");
+  Lamp[0] = LampKey[0];
+  Lamp[1] = loadImage("/Object/Others/Lamp/Lamp_On.png"); 
 
   Items[20] = loadImage("/Inventor/Items/Key.png");
   Key[0] = loadImage("/Inventor/Items/Key.png");
@@ -211,6 +215,25 @@ void Load(){
 
         case(1):
           image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
+        break;
+
+        case(80):
+          if(Light){
+            image(LampKey[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          else{
+            image(LampKey[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 80);
+        break;
+
+        case(81):
+          if(Light){
+            image(Lamp[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
+          else{
+            image(Lamp[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+          }
         break;
 
         default:
