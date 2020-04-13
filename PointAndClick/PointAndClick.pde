@@ -65,8 +65,10 @@ void setup(){
   Tutorial[1] = loadImage("/Others/tuto2.png");
   Tutorial[2] = loadImage("/Others/tuto3.png");
 
-  Items[20] = loadImage("/Inventor/Items/Key.png");
-  Key[0] = loadImage("/Inventor/Items/Key.png");
+  Items[20] = loadImage("/Inventor/Items/Key_0.png");
+  Items[21] = loadImage("/Inventor/Items/Key_1.png");
+  Key[0] = loadImage("/Inventor/Items/Key_0.png");
+  Key[1] = loadImage("/Inventor/Items/Key_1.png");
 
   cursor(Cursor, 16, 16);
   Load();
