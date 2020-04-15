@@ -13,6 +13,7 @@ PImage Personnage; //id 4
 //Special Item
 PImage LampKey[] = new PImage[2];//id 80
 PImage Lamp[] = new PImage[2]; //id 81
+PImage Lever[] = new PImage[2]; //id 82
 
 //Special var
 boolean Light = false;
@@ -42,7 +43,7 @@ int Fade = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {1,3,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {0},  {0},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
+  {{0},  {82,4,4},  {0},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -68,6 +69,8 @@ void setup(){
   LampKey[1] = loadImage("/Object/Others/Lamp/Lamp_On_key.png");
   Lamp[0] = LampKey[0];
   Lamp[1] = loadImage("/Object/Others/Lamp/Lamp_On.png"); 
+  Lever[0] = loadImage("/Object/Interactible/Lever_Off.png");
+  Lever[1] = loadImage("/Object/Interactible/Lever_On.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -238,6 +241,16 @@ void Load(){
           }
         break;
 
+        case(82):
+          if(Light){
+            image(Lever[1], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
+          }
+          else{
+            image(Lever[0], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
+          }
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
+        break;
+
         default:
         break;
       }
@@ -251,6 +264,14 @@ void Load(){
   translate(0,0);
   if(Inv){
     InventoryPrint();
+  }
+  SpecialLoad();
+}
+
+void SpecialLoad() {
+  if(room == 1 && !Light){
+    fill(0,70);
+    rect(0,0,width,height);
   }
 }
 
@@ -396,6 +417,10 @@ void OnHitbox(int id){
             Elements[room][7][i] = 81;
           }
         }
+    break;
+
+    case(82):
+      Light = !Light;
     break;
 
     default:
