@@ -15,6 +15,7 @@ PImage Personnage; //id 4
 PImage LampKey[] = new PImage[2];//id 80
 PImage Lamp[] = new PImage[2]; //id 81
 PImage Lever[] = new PImage[2]; //id 82
+PImage Cable_Barrel; //id 83
 
 //Special var
 boolean Light = false;
@@ -73,6 +74,7 @@ void setup(){
   Lamp[1] = loadImage("/Object/Others/Lamp/Lamp_On.png"); 
   Lever[0] = loadImage("/Object/Interactible/Lever_Off.png");
   Lever[1] = loadImage("/Object/Interactible/Lever_On.png");
+  Cable_Barrel = loadImage("/Object/Interactible/Cable_Barrel.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -255,6 +257,10 @@ void Load(){
             image(Lever[0], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
           }
           AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
+        break;
+
+        case(83):
+          image(Barrel, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93);
         break;
 
         default:
