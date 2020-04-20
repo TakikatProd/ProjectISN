@@ -45,7 +45,7 @@ int Fade = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {1,3,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {82,4,4},  {5,6,7},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
+  {{0},  {82,4,4},  {83,6,7},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -260,7 +260,8 @@ void Load(){
         break;
 
         case(83):
-          image(Barrel, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93);
+          image(Cable_Barrel, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93, 83);
         break;
 
         default:
@@ -426,6 +427,10 @@ void OnHitbox(int id){
 
     case(82):
       Light = !Light;
+    break;
+
+    case(83):
+      ChangeElementsById(83, 5);
     break;
 
     default:
