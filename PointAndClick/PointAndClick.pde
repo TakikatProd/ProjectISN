@@ -396,7 +396,7 @@ void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
 void OnHitbox(int id){
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
-    DeleteElementsById(id);
+    ChangeElementsById(id,0);
   }
   if(id <= 59 && id >= 40){
     if(SelectItem != 10){
@@ -421,14 +421,7 @@ void OnHitbox(int id){
 
     case(80):
       InventoryAdd(21);
-      for(int i = 0; i < Elements[room][4].length; i = i + 3){
-          if(Elements[room][4][i] == 80){
-            Elements[room][4][i] = 81;
-            Elements[room][5][i] = 81;
-            Elements[room][6][i] = 81;
-            Elements[room][7][i] = 81;
-          }
-        }
+      ChangeElementsById(80,81);
     break;
 
     case(82):
@@ -440,30 +433,20 @@ void OnHitbox(int id){
   }
 }
 
-void DeleteElementsById(int id){
+void ChangeElementsById(int PrevId, int Newid){
   if(facing < 4){
         for(int i = 0; i < Elements[room][facing].length; i = i + 3){
-          if(Elements[room][facing][i] == id){
-            Elements[room][facing][i] = 0;
-            Elements[room][facing][i+1] = 0;
-            Elements[room][facing][i+2] = 0;
+          if(Elements[room][facing][i] == PrevId){
+            Elements[room][facing][i] = Newid;
           }
         }
       } else {
         for(int i = 0; i < Elements[room][4].length; i = i + 3){
-          if(Elements[room][4][i] == id){
-            Elements[room][4][i] = 0;
-            Elements[room][4][i+1] = 0;
-            Elements[room][4][i+2] = 0;
-            Elements[room][5][i] = 0;
-            Elements[room][5][i+1] = 0;
-            Elements[room][5][i+2] = 0;
-            Elements[room][6][i] = 0;
-            Elements[room][6][i+1] = 0;
-            Elements[room][6][i+2] = 0;
-            Elements[room][7][i] = 0;
-            Elements[room][7][i+1] = 0;
-            Elements[room][7][i+2] = 0;
+          if(Elements[room][4][i] == PrevId){
+            Elements[room][4][i] = Newid;
+            Elements[room][5][i] = Newid;
+            Elements[room][6][i] = Newid;
+            Elements[room][7][i] = Newid;
           }
         }
       }
