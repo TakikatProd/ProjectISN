@@ -7,6 +7,7 @@ PImage OpenDoor; //id 60-79
 PImage Windows; //id 1
 PImage Curtains; //id 2
 PImage Box; //id 3
+PImage Barrel; //id 5
 PImage[] Key = new PImage[20]; //id 20-39
 PImage Personnage; //id 4
 
@@ -14,6 +15,7 @@ PImage Personnage; //id 4
 PImage LampKey[] = new PImage[2];//id 80
 PImage Lamp[] = new PImage[2]; //id 81
 PImage Lever[] = new PImage[2]; //id 82
+PImage Cable_Barrel; //id 83
 
 //Special var
 boolean Light = false;
@@ -43,7 +45,7 @@ int Fade = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {1,3,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {82,4,4},  {0},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
+  {{0},  {82,4,4},  {5,6,7},  {0},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -57,6 +59,7 @@ void setup(){
   Door = loadImage("/Object/Interactible/Porte.png");
   OpenDoor = loadImage("/Object/Interactible/OpenDoor.png");
   Box = loadImage("/Object/Others/Boite.png");
+  Barrel = loadImage("/Object/Others/Barrel.png");
   Windows = loadImage("/Object/Others/Windows.png");
   Curtains = loadImage("/Object/Others/Rideau.png");
   Personnage = loadImage("/Object/Others/Player.png");
@@ -71,6 +74,7 @@ void setup(){
   Lamp[1] = loadImage("/Object/Others/Lamp/Lamp_On.png"); 
   Lever[0] = loadImage("/Object/Interactible/Lever_Off.png");
   Lever[1] = loadImage("/Object/Interactible/Lever_On.png");
+  Cable_Barrel = loadImage("/Object/Interactible/Cable_Barrel.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -222,6 +226,10 @@ void Load(){
           image(Windows, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 - 10, 170, 210);
         break;
 
+        case(5):
+          image(Barrel, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93);
+        break;
+
         case(80):
           if(Light){
             image(LampKey[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
@@ -249,6 +257,10 @@ void Load(){
             image(Lever[0], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
           }
           AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
+        break;
+
+        case(83):
+          image(Barrel, Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 7, 100, 93);
         break;
 
         default:
