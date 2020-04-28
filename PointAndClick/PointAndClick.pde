@@ -16,6 +16,7 @@ PImage LampKey[] = new PImage[2];//id 80
 PImage Lamp[] = new PImage[2]; //id 81
 PImage Lever[] = new PImage[2]; //id 82
 PImage Cable_Barrel; //id 83
+PImage Dresser[] = new PImage[4]; //id 84
 
 //Special var
 boolean Light = false;
@@ -75,6 +76,10 @@ void setup(){
   Lever[0] = loadImage("/Object/Interactible/Lever_Off.png");
   Lever[1] = loadImage("/Object/Interactible/Lever_On.png");
   Cable_Barrel = loadImage("/Object/Interactible/Cable_Barrel.png");
+  Dresser[0] = loadImage("/Object/Interactible/Dresser.png");
+  Dresser[1] = loadImage("/Object/Interactible/Dresser_left_door.png")
+  Dresser[2] = loadImage("/Object/Interactible/Dresser_right_door.png")
+  Dresser[3] = loadImage("/Object/Interactible/Dresser_open_door.png")
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
 
