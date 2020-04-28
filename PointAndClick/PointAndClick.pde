@@ -63,6 +63,7 @@ int[][][] DoorMatrice =
 void setup(){
   size(1600,900);
   //Load Picture
+  Tile = loadImage("/Others/Tile.png");
   Door = loadImage("/Object/Interactible/Porte.png");
   OpenDoor = loadImage("/Object/Interactible/OpenDoor.png");
   Box = loadImage("/Object/Others/Boite.png");
