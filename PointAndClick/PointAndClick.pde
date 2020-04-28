@@ -52,7 +52,7 @@ int Fade = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {1,3,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {82,4,4},  {83,6,7},  {84,6,7},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
+  {{0},  {82,4,4},  {83,6,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -280,7 +280,7 @@ void Load(){
 
         case(84):
           image(Dresser[0], Elements[room][facing][i + 1] * 100 + 2, Elements[room][facing][i + 2] * 100 + 5, 195, 95);
-          
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 2, Elements[room][facing][i + 2] * 100 + 5, 195, 95, 84);
         break;
 
         default:
@@ -303,15 +303,16 @@ void Load(){
 void SpecialLoad() {
   if(DresserOn){
     int IdDresser = 0;
-    for(int i = 0; i < 7; i++){
-      image(Tile, i * 100, 0, 100, 100);
-      image(Tile, i * 100, 100, 100, 100);
+    for(int i = 0; i < 4; i++){
+      image(Tile, i * 400, 0, 400, 400);
+      image(Tile, i * 400, 400, 400, 400);
+      image(Tile, i * 400, 800, 400, 400);
     }
     if(room == 1 && facing == 3){
       IdDresser = 0;
     }
     int id = DresserState[IdDresser][0] * 1 + DresserState[IdDresser][1] * 2;
-    image(Dresser[id]);
+    image(Dresser[id], 20, 140, 1560, 760);
   }
   if(room == 1 && !Light){
     fill(0,70);
@@ -463,6 +464,10 @@ void OnHitbox(int id){
     case(83):
       InventoryAdd(1);
       ChangeElementsById(83, 5);
+    break;
+
+    case(84):
+      DresserOn = true;
     break;
 
     default:
