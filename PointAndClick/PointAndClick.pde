@@ -77,9 +77,9 @@ void setup(){
   Lever[1] = loadImage("/Object/Interactible/Lever_On.png");
   Cable_Barrel = loadImage("/Object/Interactible/Cable_Barrel.png");
   Dresser[0] = loadImage("/Object/Interactible/Dresser.png");
-  Dresser[1] = loadImage("/Object/Interactible/Dresser_left_door.png")
-  Dresser[2] = loadImage("/Object/Interactible/Dresser_right_door.png")
-  Dresser[3] = loadImage("/Object/Interactible/Dresser_open_door.png")
+  Dresser[1] = loadImage("/Object/Interactible/Dresser_left_door.png");
+  Dresser[2] = loadImage("/Object/Interactible/Dresser_right_door.png");
+  Dresser[3] = loadImage("/Object/Interactible/Dresser_open_door.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
 
