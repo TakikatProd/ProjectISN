@@ -1,6 +1,7 @@
 int facing = 0;
 int room = 0;
 PImage BG;
+PImage Tile;
 //Item
 PImage Door; //id 40-59
 PImage OpenDoor; //id 60-79
@@ -20,6 +21,11 @@ PImage Dresser[] = new PImage[4]; //id 84
 
 //Special var
 boolean Light = false;
+
+boolean DresserOn = false;
+int DresserState[][] = {
+  {0,0}
+};
 
 //Tutorial
 PImage[] Tutorial = new PImage[3];
@@ -289,6 +295,18 @@ void Load(){
 }
 
 void SpecialLoad() {
+  if(DresserOn){
+    int IdDresser = 0;
+    for(int i = 0; i < 7; i++){
+      image(Tile, i * 100, 0, 100, 100);
+      image(Tile, i * 100, 100, 100, 100);
+    }
+    if(room == 1 && facing == 3){
+      IdDresser = 0;
+    }
+    int id = DresserState[IdDresser][0] * 1 + DresserState[IdDresser][1] * 2;
+    image(Dresser[id]);
+  }
   if(room == 1 && !Light){
     fill(0,70);
     rect(0,0,width,height);
