@@ -143,13 +143,17 @@ void draw(){
     }
   }
   if (!Ambiance.isPlaying()){
-    Ambiance.setGain(-20);
+    Ambiance.setGain(-30);
     Ambiance.loop();
   }
 }
 
 void keyPressed(){
   //Mouvement
+  if(keyCode == TAB){
+    Inv = !Inv;
+    Load();
+ }
   if(DresserOn){
     return;
   }
@@ -192,11 +196,6 @@ void keyPressed(){
      Load();
      break;
 
-    case(TAB):
-      Inv = !Inv;
-      Load();
-      break;
-     
     default:
       break;
  }
@@ -316,9 +315,6 @@ void Load(){
   }
   rotate(0);
   translate(0,0);
-  if(Inv){
-    InventoryPrint();
-  }
   SpecialLoad();
 }
 
@@ -339,6 +335,9 @@ void SpecialLoad() {
   if(room == 1 && !Light){
     fill(0,70);
     rect(0,0,width,height);
+  }
+  if(Inv){
+    InventoryPrint();
   }
 }
 
