@@ -108,6 +108,8 @@ void setup(){
   Key[0] = loadImage("/Inventor/Items/Key_0.png");
   Key[1] = loadImage("/Inventor/Items/Key_1.png");
 
+  Ambiance = minim.loadFile("/Sounds/Music/Man Down.wav");
+
   cursor(Cursor, 16, 16);
   Load();
 }
@@ -139,6 +141,10 @@ void draw(){
       rect(0, 0, width, height);
       return;
     }
+  }
+  if (!Ambiance.isPlaying()){
+    Ambiance.setGain(-20);
+    Ambiance.loop();
   }
 }
 
