@@ -1,3 +1,5 @@
+import ddf.minim.*;
+
 int facing = 0;
 int room = 0;
 PImage BG;
@@ -24,6 +26,9 @@ boolean Light = false;
 
 boolean DresserOn = false;
 int DresserState[][] = {
+  {0,0}
+};
+int DresserID[][] = {
   {0,0}
 };
 
