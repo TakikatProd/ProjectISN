@@ -1,6 +1,6 @@
 import ddf.minim.*;
 Minim minim;
-AudioPlayer Ambiance = new AudioPlayer;
+AudioPlayer Ambiance;
 
 
 int facing = 0;
@@ -24,6 +24,9 @@ PImage Lever[] = new PImage[2]; //id 82
 PImage Cable_Barrel; //id 83
 PImage Dresser[] = new PImage[4]; //id 84
 PImage Cable_red; //id 84
+
+//other
+PImage ExitArrow;
 
 //Special var
 boolean Light = false;
@@ -109,6 +112,8 @@ void setup(){
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
   Key[0] = loadImage("/Inventor/Items/Key_0.png");
   Key[1] = loadImage("/Inventor/Items/Key_1.png");
+
+  ExitArrow = loadImage("/Others/Exit_Arrow.png");
 
   cursor(Cursor, 16, 16);
   Load();
@@ -317,13 +322,15 @@ void Load(){
 
 void SpecialLoad() {
   if(DresserOn){
+    NbElements = 0;
     IdDresser = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
       image(Tile, i * 400, 400, 400, 400);
       image(Tile, i * 400, 800, 400, 400);
-      NbElements = 0;
     }
+    image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(10, 10, 160, 120, 1);
     if(room == 1 && facing == 3){
       IdDresser = 0;
     }
@@ -348,6 +355,7 @@ void mousePressed() {
       if(mouseY > Hitbox[i][1] && mouseY < (Hitbox[i][1] + Hitbox[i][3])){
         OnHitbox(Hitbox[i][4]);
         Load();
+        return;
       }
     }
   }
@@ -447,6 +455,10 @@ void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
 void OnHitbox(int id){
   if(DresserOn){
     switch(id){
+      case(1):
+        DresserOn = false;
+      break;
+
       case(2):
         DresserState[IdDresser][0] = 1-DresserState[IdDresser][0];
       break;
