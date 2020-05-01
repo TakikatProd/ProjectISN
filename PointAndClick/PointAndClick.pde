@@ -1,3 +1,8 @@
+import ddf.minim.*;
+Minim minim;
+AudioPlayer Ambiance = new AudioPlayer;
+
+
 int facing = 0;
 int room = 0;
 PImage BG;
@@ -18,6 +23,7 @@ PImage Lamp[] = new PImage[2]; //id 81
 PImage Lever[] = new PImage[2]; //id 82
 PImage Cable_Barrel; //id 83
 PImage Dresser[] = new PImage[4]; //id 84
+PImage Cable_red; //id 84
 
 //Special var
 boolean Light = false;
@@ -25,6 +31,9 @@ boolean Light = false;
 boolean DresserOn = false;
 int DresserState[][] = {
   {0,0}
+};
+int DresserID[][] = {
+  {85,0,0}
 };
 
 int IdDresser = 0;
@@ -64,6 +73,8 @@ int[][][] DoorMatrice =
 
 void setup(){
   size(1600,900);
+
+  minim = new Minim(this);
   //Load Picture
   Tile = loadImage("/Others/Tile.png");
   Door = loadImage("/Object/Interactible/Porte.png");
@@ -91,6 +102,8 @@ void setup(){
   Dresser[3] = loadImage("/Object/Interactible/Dresser_open_door.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
+  Items[2] = loadImage("/Inventor/Items/Cable_red.png");
+  Cable_red = loadImage("/Inventor/Items/Cable_red.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
