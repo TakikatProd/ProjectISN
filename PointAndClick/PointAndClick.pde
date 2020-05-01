@@ -1,6 +1,6 @@
 import ddf.minim.*;
 Minim minim;
-AudioPlayer Ambiance = new AudioPlayer;
+AudioPlayer Ambiance;
 
 
 int facing = 0;
@@ -144,6 +144,9 @@ void draw(){
 
 void keyPressed(){
   //Mouvement
+  if(DresserOn){
+    return;
+  }
   switch(keyCode){
    case(UP):
      if(facing < 4){
