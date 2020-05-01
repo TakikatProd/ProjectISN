@@ -353,6 +353,7 @@ void SpecialLoad() {
 }
 
 void mousePressed() {
+  boolean HitboxOn = true;
   if(Tuto){
     Change = true;
   }
@@ -360,9 +361,11 @@ void mousePressed() {
   for(int i = 0; i < NbElements; i++){
     if(mouseX > Hitbox[i][0] && mouseX < (Hitbox[i][0] + Hitbox[i][2])){
       if(mouseY > Hitbox[i][1] && mouseY < (Hitbox[i][1] + Hitbox[i][3])){
-        OnHitbox(Hitbox[i][4]);
-        Load();
-        return;
+        if(HitboxOn){
+          OnHitbox(Hitbox[i][4]);
+          Load();
+          HitboxOn = false;
+        }
       }
     }
   }
