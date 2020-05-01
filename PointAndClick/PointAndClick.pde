@@ -27,6 +27,8 @@ int DresserState[][] = {
   {0,0}
 };
 
+int IdDresser = 0;
+
 //Tutorial
 PImage[] Tutorial = new PImage[3];
 
@@ -302,17 +304,20 @@ void Load(){
 
 void SpecialLoad() {
   if(DresserOn){
-    int IdDresser = 0;
+    IdDresser = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
       image(Tile, i * 400, 400, 400, 400);
       image(Tile, i * 400, 800, 400, 400);
+      NbElements = 0;
     }
     if(room == 1 && facing == 3){
       IdDresser = 0;
     }
     int id = DresserState[IdDresser][0] * 1 + DresserState[IdDresser][1] * 2;
     image(Dresser[id], 20, 140, 1560, 760);
+    AddHitbox(220, 340, 560, 520, 2);
+    AddHitbox(820, 340, 560, 520, 3);
   }
   if(room == 1 && !Light){
     fill(0,70);
@@ -427,6 +432,20 @@ void AddHitbox(int posx, int posy, int sizex, int sizey, int id){
 }
 
 void OnHitbox(int id){
+  if(DresserOn){
+    switch(id){
+      case(2):
+        DresserState[IdDresser][0] = 1-DresserState[IdDresser][0];
+      break;
+
+      case(3):
+        DresserState[IdDresser][1] = 1-DresserState[IdDresser][1];
+      break;
+
+      default:
+      break;
+    }
+  }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
     ChangeElementsById(id,0);
