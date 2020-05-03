@@ -2,7 +2,6 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer Ambiance;
 
-
 int facing = 0;
 int room = 0;
 PImage BG;
