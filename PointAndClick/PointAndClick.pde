@@ -4,6 +4,7 @@ AudioPlayer Ambiance;
 
 int facing = 0;
 int room = 0;
+boolean Tuto = true;
 PImage BG;
 PImage Tile;
 //Item
@@ -22,7 +23,8 @@ PImage Lamp[] = new PImage[2]; //id 81
 PImage Lever[] = new PImage[2]; //id 82
 PImage Cable_Barrel; //id 83
 PImage Dresser[] = new PImage[4]; //id 84
-PImage Cable_red; //id 84
+PImage Cable_red; //id 85
+PImage BlackLamp[] = new PImage[2]; //id 86
 
 //other
 PImage ExitArrow;
@@ -35,7 +37,7 @@ int DresserState[][] = {
   {0,0}
 };
 int DresserID[][] = {
-  {85,0,0}
+  {85,500,620,0  ,86,1000,680,1}
 };
 
 int IdDresser = 0;
@@ -57,7 +59,6 @@ PImage Cursor;
 int[][] Hitbox = new int[10][5];
 int NbElements = 0;
 
-boolean Tuto = true;
 boolean Change = false;
 int PhaseTuto = 0;
 int Fade = 0;
@@ -105,7 +106,10 @@ void setup(){
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
+
+  Items[4] = loadImage("/Object/Interactible/BlackLamp_Off.png");
   Cable_red = loadImage("/Inventor/Items/Cable_red.png");
+  BlackLamp[0] = loadImage("/Object/Interactible/BlackLamp_Off.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -339,6 +343,24 @@ void SpecialLoad() {
     }
     int id = DresserState[IdDresser][0] * 1 + DresserState[IdDresser][1] * 2;
     image(Dresser[id], 20, 140, 1560, 760);
+    for(int i = 0; i < DresserID[IdDresser].length; i = i + 4){
+      if(DresserState[IdDresser][DresserID[IdDresser][i + 3]] == 1){
+        switch(DresserID[IdDresser][i]){
+          case(85):
+            image(Cable_red, DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 260, 240);
+            AddHitbox(DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 260, 240, 85);
+          break;
+
+          case(86):
+            image(BlackLamp[0], DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180);
+            AddHitbox(DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180, 86);
+          break;
+            
+          default:
+          break;
+        }
+      }
+    }
     AddHitbox(220, 340, 560, 520, 2);
     AddHitbox(820, 340, 560, 520, 3);
   }
@@ -523,6 +545,16 @@ void OnHitbox(int id){
       DresserOn = true;
     break;
 
+    case(85):
+      InventoryAdd(2);
+      ChangeDresserElementsById(85,0);
+    break;
+
+    case(86):
+      InventoryAdd(4);
+      ChangeDresserElementsById(86,0);
+    break;
+
     default:
     break;
   }
@@ -545,4 +577,12 @@ void ChangeElementsById(int PrevId, int Newid){
           }
         }
       }
+}
+
+void ChangeDresserElementsById(int PrevId, int Newid){
+  for(int i = 0; i < DresserID[IdDresser].length; i = i + 4){
+    if(DresserID[IdDresser][i] == PrevId){
+      DresserID[IdDresser][i] = Newid;
+    }
+  }
 }
