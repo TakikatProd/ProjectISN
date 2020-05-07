@@ -4,7 +4,7 @@ AudioPlayer Ambiance;
 
 int facing = 0;
 int room = 0;
-boolean Tuto = true;
+boolean Tuto = false;
 PImage BG;
 PImage Tile;
 //Item
@@ -28,9 +28,15 @@ PImage BlackLamp[] = new PImage[2]; //id 86
 
 //other
 PImage ExitArrow;
+PImage MenuBG;
+PImage NewGame;
+PImage LoadGame;
+PImage ExitGame;
+PImage MenuTitle;
 
 //Special var
 boolean Light = false;
+Boolean Menu = true;
 
 boolean DresserOn = false;
 int DresserState[][] = {
@@ -118,6 +124,12 @@ void setup(){
 
   ExitArrow = loadImage("/Others/Exit_Arrow.png");
   Ambiance = minim.loadFile("/Sounds/Music/Man Down.wav");
+
+  NewGame = loadImage("/Others/NewGame.png");
+  LoadGame = loadImage("/Others/LoadGame.png");
+  ExitGame = loadImage("/Others/ExitGame.png");
+  MenuBG = loadImage("/Others/MenuBG.png");
+  MenuTitle = loadImage("/Others/MenuTitle.png");
 
   cursor(Cursor, 16, 16);
   Load();
@@ -349,6 +361,13 @@ void Load(){
 }
 
 void SpecialLoad() {
+  if(Menu){
+    image(MenuBG,0,0,1600,900);
+    image(NewGame,600,350,400,90);
+    image(LoadGame,600,500,400,90);
+    image(ExitGame,600,650,400,90);
+    image(MenuTitle,500,85,600,237);
+  }
   if(DresserOn){
     NbElements = 0;
     IdDresser = 0;
@@ -396,6 +415,12 @@ void SpecialLoad() {
 
 void mousePressed() {
   boolean HitboxOn = true;
+  
+  if(Menu){
+    Menu = false;
+    Tuto = true;
+  }
+  
   if(Tuto){
     Change = true;
   }
