@@ -638,14 +638,68 @@ void MenuNew(){
 
 void MenuLoad(){
   Tuto = false;
+  String[] StringLoad = loadStrings("File.txt");
+  room = Integer.parseInt(StringLoad[0]);
+  facing = Integer.parseInt(StringLoad[1]);
+  String[] ElementsLoad1 = split(StringLoad[2], '/');
+  for(int i = 0; i<ElementsLoad1.length; i++){
+    String[] ElementsLoad2 = split(ElementsLoad1[i], '%');
+    for(int j = 0; j<ElementsLoad2.length; j++){
+      String[] ElementsLoad3 = split(ElementsLoad2[j], ',');
+      for(int k = 0; k<ElementsLoad3.length; k++){
+        Elements[i][j][k] = Integer.parseInt(ElementsLoad3[k]);
+      }
+    }
+  }
+
+  String[] DoorLoad1 = split(StringLoad[3], '/');
+  for(int i = 0; i<ElementsLoad1.length; i++){
+    String[] ElementsLoad2 = split(ElementsLoad1[i], '%');
+    for(int j = 0; j<ElementsLoad2.length; j++){
+      String[] ElementsLoad3 = split(ElementsLoad2[j], ',');
+      for(int k = 0; k<ElementsLoad3.length; k++){
+        Elements[i][j][k] = Integer.parseInt(ElementsLoad3[k]);
+      }
+    }
+  }
 }
 
 void Save(){
   String[] List = new String[4];
   List[0] = str(room);
   List[1] = str(facing);
-  List[2] = "";
-  List[3] = "";
+  String ElementSave = "";
+  for(int i = 0; i<Elements.length; i++){
+    for(int j = 0; j<Elements[i].length; j++){
+      for(int k = 0; k<Elements[i][j].length; k++){
+        ElementSave += str(Elements[i][j][k]);
+        ElementSave += ',';
+      }
+      ElementSave = ElementSave.substring(0, ElementSave.length()-1);
+      ElementSave += '%';
+    }
+    ElementSave = ElementSave.substring(0, ElementSave.length()-1);
+    ElementSave += '/';
+  }
+  ElementSave = ElementSave.substring(0, ElementSave.length()-1);
+  List[2] = ElementSave;
+
+  String DoorSave = "";
+  for(int i = 0; i<DoorMatrice.length; i++){
+    for(int j = 0; j<DoorMatrice[i].length; j++){
+      for(int k = 0; k<DoorMatrice[i][j].length; k++){
+        DoorSave += str(DoorMatrice[i][j][k]);
+        DoorSave += ',';
+      }
+      DoorSave = DoorSave.substring(0, DoorSave.length()-1);
+     DoorSave += '%';
+    }
+    DoorSave = DoorSave.substring(0, DoorSave.length()-1);
+    DoorSave += '/';
+  }
+  DoorSave = DoorSave.substring(0, DoorSave.length()-1);
+  List[3] = DoorSave;
+
   saveStrings("File.txt", List);
 
   exit();
