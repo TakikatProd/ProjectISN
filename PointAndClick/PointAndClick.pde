@@ -134,7 +134,7 @@ void setup(){
   MenuTitle = loadImage("/Others/MenuTitle.png");
 
   cursor(Cursor, 16, 16);
-  Load();
+  MenuPrint();
 }
 
 void draw(){
@@ -218,6 +218,10 @@ void keyPressed(){
      }
      Load();
      break;
+
+    case(BACKSPACE):
+      Save();
+    break;
 
     default:
       break;
@@ -542,6 +546,18 @@ void OnHitbox(int id){
   }
   switch(id){
 
+    case(-1):
+      MenuNew();
+    break;
+
+    case(-2):
+      MenuLoad();
+    break;
+
+    case(-3):
+      exit();
+    break;
+
     case(80):
       InventoryAdd(21);
       ChangeElementsById(80,81);
@@ -600,4 +616,27 @@ void ChangeDresserElementsById(int PrevId, int Newid){
       DresserID[IdDresser][i] = Newid;
     }
   }
+}
+
+void MenuPrint(){
+  image(MenuBG, 0, 0, 1600, 900);
+  image(NewGame, 600, 350, 400, 90);
+  AddHitbox(600, 350, 400, 90, -1);
+  image(LoadGame, 600, 500, 400, 90);
+  AddHitbox(600, 500, 400, 90, -2);
+  image(ExitGame, 600, 650, 400, 90);
+  AddHitbox(600, 650, 400, 90, -3);
+  image(MenuTitle, 500, 85, 600, 237);
+}
+
+void MenuNew(){
+  Tuto = true;
+}
+
+void MenuLoad(){
+  Tuto = false;
+}
+
+void Save(){
+  exit();
 }
