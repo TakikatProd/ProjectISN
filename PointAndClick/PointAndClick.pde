@@ -425,6 +425,9 @@ void mousePressed() {
           OnHitbox(Hitbox[i][4]);
           Load();
           HitboxOn = false;
+          if(Tuto){
+            return;
+          }
         }
       }
     }
