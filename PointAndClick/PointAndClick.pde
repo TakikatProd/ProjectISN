@@ -642,5 +642,12 @@ void MenuLoad(){
 }
 
 void Save(){
+  String[] List = new String[4];
+  List[0] = str(room);
+  List[1] = str(facing);
+  List[2] = "";
+  List[3] = "";
+  saveStrings("File.txt", List);
+
   exit();
 }
