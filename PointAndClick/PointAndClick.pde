@@ -653,12 +653,12 @@ void MenuLoad(){
   }
 
   String[] DoorLoad1 = split(StringLoad[3], '/');
-  for(int i = 0; i<ElementsLoad1.length; i++){
-    String[] ElementsLoad2 = split(ElementsLoad1[i], '%');
-    for(int j = 0; j<ElementsLoad2.length; j++){
-      String[] ElementsLoad3 = split(ElementsLoad2[j], ',');
-      for(int k = 0; k<ElementsLoad3.length; k++){
-        Elements[i][j][k] = Integer.parseInt(ElementsLoad3[k]);
+  for(int i = 0; i<DoorLoad1.length; i++){
+    String[] DoorLoad2 = split(DoorLoad1[i], '%');
+    for(int j = 0; j<DoorLoad2.length; j++){
+      String[] DoorLoad3 = split(DoorLoad2[j], ',');
+      for(int k = 0; k<DoorLoad3.length; k++){
+        DoorMatrice[i][j][k] = Integer.parseInt(DoorLoad3[k]);
       }
     }
   }
