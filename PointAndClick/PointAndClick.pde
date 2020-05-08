@@ -36,7 +36,7 @@ PImage MenuTitle;
 
 //Special var
 boolean Light = false;
-Boolean Menu = true;
+boolean Menu = true;
 
 boolean DresserOn = false;
 int DresserState[][] = {
@@ -71,12 +71,14 @@ int Fade = 0;
 
 int[][][] Elements = 
 {
-  {{4,3,6,  2,4,2},  {1,3,2},  {3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {82,4,4},  {83,6,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}}
+  {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
+  {{0},  {82,4,4},  {83,5,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{4,3,6},  {82,4,4},  {83,6,7},  {84,5,6},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
   {{40,7,6},  {0}, {0}, {0}},
+  {{0},  {0}, {60,7,6}, {0}},
   {{0},  {0}, {0}, {0}}
 };
 
@@ -361,13 +363,6 @@ void Load(){
 }
 
 void SpecialLoad() {
-  if(Menu){
-    image(MenuBG,0,0,1600,900);
-    image(NewGame,600,350,400,90);
-    image(LoadGame,600,500,400,90);
-    image(ExitGame,600,650,400,90);
-    image(MenuTitle,500,85,600,237);
-  }
   if(DresserOn){
     NbElements = 0;
     IdDresser = 0;
@@ -415,12 +410,6 @@ void SpecialLoad() {
 
 void mousePressed() {
   boolean HitboxOn = true;
-  
-  if(Menu){
-    Menu = false;
-    Tuto = true;
-  }
-  
   if(Tuto){
     Change = true;
   }
