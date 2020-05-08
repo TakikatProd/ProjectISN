@@ -634,6 +634,7 @@ void MenuPrint(){
 
 void MenuNew(){
   Tuto = true;
+  Save();
 }
 
 void MenuLoad(){
