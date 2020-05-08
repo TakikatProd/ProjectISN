@@ -665,7 +665,7 @@ void MenuLoad(){
 }
 
 void Save(){
-  String[] List = new String[4];
+  String[] List = new String[6];
   List[0] = str(room);
   List[1] = str(facing);
   String ElementSave = "";
@@ -699,6 +699,26 @@ void Save(){
   }
   DoorSave = DoorSave.substring(0, DoorSave.length()-1);
   List[3] = DoorSave;
+
+  String InventorySave = "";
+  for(int i = 0; i<Inventory.length; i++){
+    InventorySave += str(Inventory[i]);
+    InventorySave += ',';
+  }
+  InventorySave = InventorySave.substring(0, InventorySave.length()-1);
+  List[4] = InventorySave;
+
+  String DresserIDSave = "";
+  for(int i = 0; i<DresserID.length; i++){
+    for(int j = 0; j<DresserID[i].length; j++){
+      DresserIDSave += str(DresserID[i][j]);
+      DresserIDSave += ',';
+    }
+    DresserIDSave = DresserIDSave.substring(0, DresserIDSave.length()-1);
+    DresserIDSave += '%';
+  }
+  DresserIDSave = DresserIDSave.substring(0, DresserIDSave.length()-1);
+  List[5] = DresserIDSave;
 
   saveStrings("File.txt", List);
 
