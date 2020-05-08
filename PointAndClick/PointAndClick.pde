@@ -642,24 +642,37 @@ void MenuLoad(){
   room = Integer.parseInt(StringLoad[0]);
   facing = Integer.parseInt(StringLoad[1]);
   String[] ElementsLoad1 = split(StringLoad[2], '/');
-  for(int i = 0; i<ElementsLoad1.length; i++){
+  for(int i = 0; i < ElementsLoad1.length; i++){
     String[] ElementsLoad2 = split(ElementsLoad1[i], '%');
-    for(int j = 0; j<ElementsLoad2.length; j++){
+    for(int j = 0; j < ElementsLoad2.length; j++){
       String[] ElementsLoad3 = split(ElementsLoad2[j], ',');
-      for(int k = 0; k<ElementsLoad3.length; k++){
+      for(int k = 0; k < ElementsLoad3.length; k++){
         Elements[i][j][k] = Integer.parseInt(ElementsLoad3[k]);
       }
     }
   }
 
   String[] DoorLoad1 = split(StringLoad[3], '/');
-  for(int i = 0; i<DoorLoad1.length; i++){
+  for(int i = 0; i < DoorLoad1.length; i++){
     String[] DoorLoad2 = split(DoorLoad1[i], '%');
-    for(int j = 0; j<DoorLoad2.length; j++){
+    for(int j = 0; j < DoorLoad2.length; j++){
       String[] DoorLoad3 = split(DoorLoad2[j], ',');
-      for(int k = 0; k<DoorLoad3.length; k++){
+      for(int k = 0; k < DoorLoad3.length; k++){
         DoorMatrice[i][j][k] = Integer.parseInt(DoorLoad3[k]);
       }
+    }
+  }
+
+  String[] InventoryLoad = split(StringLoad[4], ',');
+  for(int i = 0; i<InventoryLoad.length; i++){
+    Inventory[i] = Integer.parseInt(InventoryLoad[i]);
+  }
+
+  String[] DresserIDLoad1 = split(StringLoad[5], '%');
+  for(int i = 0; i < DresserIDLoad1.length; i++){
+    String[] DresserIDLoad2 = split(DresserIDLoad1[i], ',');
+    for(int j = 0; j < DresserIDLoad2.length; j++){
+      DresserID[i][j] = Integer.parseInt(DresserIDLoad2[j]);
     }
   }
 }
@@ -669,9 +682,9 @@ void Save(){
   List[0] = str(room);
   List[1] = str(facing);
   String ElementSave = "";
-  for(int i = 0; i<Elements.length; i++){
-    for(int j = 0; j<Elements[i].length; j++){
-      for(int k = 0; k<Elements[i][j].length; k++){
+  for(int i = 0; i < Elements.length; i++){
+    for(int j = 0; j < Elements[i].length; j++){
+      for(int k = 0; k < Elements[i][j].length; k++){
         ElementSave += str(Elements[i][j][k]);
         ElementSave += ',';
       }
@@ -685,9 +698,9 @@ void Save(){
   List[2] = ElementSave;
 
   String DoorSave = "";
-  for(int i = 0; i<DoorMatrice.length; i++){
-    for(int j = 0; j<DoorMatrice[i].length; j++){
-      for(int k = 0; k<DoorMatrice[i][j].length; k++){
+  for(int i = 0; i < DoorMatrice.length; i++){
+    for(int j = 0; j < DoorMatrice[i].length; j++){
+      for(int k = 0; k < DoorMatrice[i][j].length; k++){
         DoorSave += str(DoorMatrice[i][j][k]);
         DoorSave += ',';
       }
@@ -701,7 +714,7 @@ void Save(){
   List[3] = DoorSave;
 
   String InventorySave = "";
-  for(int i = 0; i<Inventory.length; i++){
+  for(int i = 0; i < Inventory.length; i++){
     InventorySave += str(Inventory[i]);
     InventorySave += ',';
   }
@@ -709,8 +722,8 @@ void Save(){
   List[4] = InventorySave;
 
   String DresserIDSave = "";
-  for(int i = 0; i<DresserID.length; i++){
-    for(int j = 0; j<DresserID[i].length; j++){
+  for(int i = 0; i < DresserID.length; i++){
+    for(int j = 0; j < DresserID[i].length; j++){
       DresserIDSave += str(DresserID[i][j]);
       DresserIDSave += ',';
     }
