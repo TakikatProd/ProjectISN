@@ -221,6 +221,7 @@ void keyPressed(){
 
     case(BACKSPACE):
       Save();
+      exit();
     break;
 
     default:
@@ -735,6 +736,4 @@ void Save(){
   List[5] = DresserIDSave;
 
   saveStrings("File.txt", List);
-
-  exit();
 }
