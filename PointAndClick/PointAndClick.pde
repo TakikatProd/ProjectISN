@@ -24,7 +24,8 @@ PImage Lever[] = new PImage[2]; //id 82
 PImage Cable_Barrel; //id 83
 PImage Dresser[] = new PImage[4]; //id 84
 PImage Cable_red; //id 85
-PImage BlackLamp[] = new PImage[2]; //id 86
+PImage BulbLamp[] = new PImage[2]; //id 86
+PImage BlackLamp[] = new PImage[2]; //id 87
 
 //other
 PImage ExitArrow;
@@ -43,7 +44,7 @@ int DresserState[][] = {
   {0,0}
 };
 int DresserID[][] = {
-  {85,500,620,0  ,86,1000,680,1}
+  {85,500,620,0  ,87,1000,680,1}
 };
 
 int IdDresser = 0;
@@ -115,9 +116,12 @@ void setup(){
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
 
-  Items[4] = loadImage("/Object/Interactible/BlackLamp_Off.png");
+  Items[4] = loadImage("/Inventor/Items/BlackLamp.png");
   Cable_red = loadImage("/Inventor/Items/Cable_red.png");
-  BlackLamp[0] = loadImage("/Object/Interactible/BlackLamp_Off.png");
+  BulbLamp[0] = loadImage("/Object/Others/Bulb/Lamp_Off.png");
+  BulbLamp[1] = loadImage("/Object/Others/Bulb/Lamp_On.png");
+  BlackLamp[0] = loadImage("/Object/Others/Bulb/BlackLamp_Off.png");
+  BlackLamp[1] = loadImage("/Object/Others/Bulb/BlackLamp_On.png");
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
@@ -173,6 +177,9 @@ void draw(){
 
 void keyPressed(){
   //Mouvement
+  if(Menu){
+    return;
+  }
   if(keyCode == TAB){
     Inv = !Inv;
     Load();
@@ -391,9 +398,9 @@ void SpecialLoad() {
             AddHitbox(DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 260, 240, 85);
           break;
 
-          case(86):
-            image(BlackLamp[0], DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180);
-            AddHitbox(DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180, 86);
+          case(87):
+            image(Items[4], DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180);
+            AddHitbox(DresserID[IdDresser][i + 1], DresserID[IdDresser][i + 2], 180, 180, 87);
           break;
             
           default:
@@ -585,9 +592,9 @@ void OnHitbox(int id){
       ChangeDresserElementsById(85,0);
     break;
 
-    case(86):
+    case(87):
       InventoryAdd(4);
-      ChangeDresserElementsById(86,0);
+      ChangeDresserElementsById(87,0);
     break;
 
     default:
@@ -635,10 +642,12 @@ void MenuPrint(){
 
 void MenuNew(){
   Tuto = true;
+  Menu = false;
   Save();
 }
 
 void MenuLoad(){
+  Menu = false;
   Tuto = false;
   String[] StringLoad = loadStrings("File.txt");
   room = Integer.parseInt(StringLoad[0]);
