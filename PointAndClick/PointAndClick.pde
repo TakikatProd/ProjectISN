@@ -454,10 +454,16 @@ void SpecialLoad() {
     else{
       image(ElecPanelOff[1],512,70,576,768);
       if(Mask[0]){
-        image(MaskCable[0],608,262,48,168);
+        image(MaskCable[0],608,260,48,168);
       }
       else{
-        AddHitbox(608,262,48,168,2);
+        AddHitbox(608,260,48,168,2);
+      }
+      if(Mask[1]){
+        image(MaskCable[1],943,501,48,240);
+      }
+      else{
+        AddHitbox(943,501,48,240,3);
       }
       //fill(255);
       //rect(512+96,70+192,48,168);
@@ -594,6 +600,17 @@ void OnHitbox(int id){
       case(2):
         if(Inventory[SelectItem] == 1){
           Mask[0] = true;
+          Inventory[SelectItem] = 0;
+          if(Mask[0] && Mask[1] && Mask[2]){
+            ChangeElementsById(88,89);
+          }
+          Load();
+        }
+      break;
+
+      case(3):
+        if(Inventory[SelectItem] == 2){
+          Mask[1] = true;
           Inventory[SelectItem] = 0;
           if(Mask[0] && Mask[1] && Mask[2]){
             ChangeElementsById(88,89);
