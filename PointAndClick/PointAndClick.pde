@@ -115,7 +115,7 @@ void setup(){
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
-
+  Items[3] = loadImage("/Inventor/Items/Cable_Green.png");
   Items[4] = loadImage("/Inventor/Items/BlackLamp.png");
   Cable_red = loadImage("/Inventor/Items/Cable_red.png");
   BulbLamp[0] = loadImage("/Object/Others/Bulb/Lamp_Off.png");
@@ -440,13 +440,15 @@ void mousePressed() {
       }
     }
   }
-  for(int i = 0; i < 9; i++){
-    if(mouseX > 1505 && mouseX < 1595){
-      if(mouseY > 100 * i + 5 && mouseY < 100 * i + 105){
-        if(Inventory[i] != 0){
-          SelectItem = i;
-          cursor(Items[Inventory[i]],0,0);
-          return;
+  if(Inv){
+    for(int i = 0; i < 9; i++){
+      if(mouseX > 1505 && mouseX < 1595){
+        if(mouseY > 100 * i + 5 && mouseY < 100 * i + 105){
+          if(Inventory[i] != 0){
+            SelectItem = i;
+            cursor(Items[Inventory[i]],0,0);
+            return;
+          }
         }
       }
     }
@@ -462,8 +464,6 @@ void InventoryPrint(){
       image(Items[Inventory[i]], 1515, i*100+15, 70, 70);
     }
   }
-
-
 }
 
 void InventoryAdd(int id){
