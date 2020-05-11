@@ -592,13 +592,15 @@ void OnHitbox(int id){
       break;
 
       case(2):
-        if(Inventory[SelectItem] == 1){
-          Mask[0] = true;
-          Inventory[SelectItem] = 0;
-          if(Mask[0] && Mask[1] && Mask[2]){
-            ChangeElementsById(88,89);
+        if(SelectItem != 10){
+          if(Inventory[SelectItem] == 1){
+            Mask[0] = true;
+            Inventory[SelectItem] = 0;
+            if(Mask[0] && Mask[1] && Mask[2]){
+              ChangeElementsById(88,89);
+            }
+            Load();
           }
-          Load();
         }
       break;
 
@@ -762,7 +764,7 @@ void MenuLoad(){
   }
 
   String[] InventoryLoad = split(StringLoad[4], ',');
-  for(int i = 0; i<InventoryLoad.length; i++){
+  for(int i = 0; i < InventoryLoad.length; i++){
     Inventory[i] = Integer.parseInt(InventoryLoad[i]);
   }
 
@@ -773,10 +775,17 @@ void MenuLoad(){
       DresserID[i][j] = Integer.parseInt(DresserIDLoad2[j]);
     }
   }
+
+  String[] PanelMaskLoad = split(StringLoad[6], ',');
+  for(int i = 0; i < PanelMaskLoad.length; i++){
+    if(PanelMaskLoad[i].charAt(0) == '1'){
+      Mask[i] = true;
+    }
+  }
 }
 
 void Save(){
-  String[] List = new String[6];
+  String[] List = new String[7];
   List[0] = str(room);
   List[1] = str(facing);
   String ElementSave = "";
@@ -830,6 +839,19 @@ void Save(){
   }
   DresserIDSave = DresserIDSave.substring(0, DresserIDSave.length()-1);
   List[5] = DresserIDSave;
+
+  String PanelMaskSave = "";
+  for(int i = 0; i < Mask.length; i++){
+    if(Mask[i]){
+      PanelMaskSave += '1';
+    }
+    else{
+      PanelMaskSave += '0';
+    }
+    PanelMaskSave += ',';
+  }
+  PanelMaskSave = PanelMaskSave.substring(0, PanelMaskSave.length()-1);
+  List[6] = PanelMaskSave;
 
   saveStrings("File.txt", List);
 }
