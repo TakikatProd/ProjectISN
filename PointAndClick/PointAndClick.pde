@@ -177,7 +177,7 @@ void draw(){
 
 void keyPressed(){
   //Mouvement
-  if(Menu){
+  if(Menu || Tuto){
     return;
   }
   if(keyCode == TAB){
