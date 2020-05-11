@@ -26,6 +26,8 @@ PImage Dresser[] = new PImage[4]; //id 84
 PImage Cable_red; //id 85
 PImage BulbLamp[] = new PImage[2]; //id 86
 PImage BlackLamp[] = new PImage[2]; //id 87
+PImage ElecPanelOff[] = new PImage[2]; //id 88
+PImage ElecPanelOn[] = new PImage[2]; //id 89
 
 //other
 PImage ExitArrow;
@@ -34,6 +36,7 @@ PImage NewGame;
 PImage LoadGame;
 PImage ExitGame;
 PImage MenuTitle;
+PImage MaskCable[] = new PImage[3];
 
 //Special var
 boolean Light = false;
@@ -48,6 +51,9 @@ int DresserID[][] = {
 };
 
 int IdDresser = 0;
+
+boolean PanelOn = false;
+boolean Mask[] = new boolean[3];
 
 //Tutorial
 PImage[] Tutorial = new PImage[3];
@@ -74,13 +80,13 @@ int[][][] Elements =
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
   {{0},  {82,4,4},  {83,5,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{4,3,6},  {82,4,4},  {83,6,7},  {84,5,6},  {0},  {0},  {0},  {0}}
+  {{88,4,4},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
   {{40,7,6},  {0}, {0}, {0}},
-  {{0},  {0}, {60,7,6}, {0}},
-  {{0},  {0}, {0}, {0}}
+  {{0},  {41,9,5}, {60,7,6}, {0}},
+  {{0},  {0}, {0}, {61,7,6}}
 };
 
 void setup(){
@@ -112,6 +118,13 @@ void setup(){
   Dresser[1] = loadImage("/Object/Interactible/Dresser_left_door.png");
   Dresser[2] = loadImage("/Object/Interactible/Dresser_right_door.png");
   Dresser[3] = loadImage("/Object/Interactible/Dresser_open_door.png");
+  ElecPanelOff[0] = loadImage("/Object/Interactible/ClosedElecPanel.png");
+  ElecPanelOff[1] = loadImage("/Object/Interactible/OpenElecPanelOff.png");
+  ElecPanelOn[0] = loadImage("/Object/Interactible/ClosedElecPanel.png");
+  ElecPanelOn[1] = loadImage("/Object/Interactible/OpenElecPanelOn.png");
+  MaskCable[0] = loadImage("/Object/Others/Panel/YellowCorrec.png");
+  MaskCable[1] = loadImage("/Object/Others/Panel/RedCorrec.png");
+  MaskCable[2] = loadImage("/Object/Others/Panel/GreenCorrec.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -184,9 +197,9 @@ void keyPressed(){
     Inv = !Inv;
     Load();
  }
-  if(DresserOn){
-    return;
-  }
+ if(DresserOn || PanelOn){
+   return;
+ }
   switch(keyCode){
    case(UP):
      if(facing < 4){
@@ -339,6 +352,16 @@ void Load(){
           AddHitbox(Elements[room][facing][i + 1] * 100 + 2, Elements[room][facing][i + 2] * 100 + 5, 195, 95, 84);
         break;
 
+        case(88):
+          image(ElecPanelOff[0], Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192);
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192, 88);
+        break;
+
+        case(89):
+          image(ElecPanelOn[0], Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192);
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192, 89);
+        break;
+
         default:
         break;
       }
@@ -411,6 +434,36 @@ void SpecialLoad() {
     AddHitbox(220, 340, 560, 520, 2);
     AddHitbox(820, 340, 560, 520, 3);
   }
+
+  if(PanelOn){
+    NbElements = 0;
+    for(int i = 0; i < 4; i++){
+      image(Tile, i * 400, 0, 400, 400);
+      image(Tile, i * 400, 400, 400, 400);
+      image(Tile, i * 400, 800, 400, 400);
+    }
+    image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(10, 10, 160, 120, 1);
+    boolean PanelFonction = false;
+    if(Mask[0] && Mask[1] && Mask[2]){
+      PanelFonction = true;
+    }
+    if(PanelFonction){
+      image(ElecPanelOn[1],512,70,576,768);
+    }
+    else{
+      image(ElecPanelOff[1],512,70,576,768);
+      if(Mask[0]){
+        image(MaskCable[0],608,262,48,168);
+      }
+      else{
+        AddHitbox(608,262,48,168,2);
+      }
+      //fill(255);
+      //rect(512+96,70+192,48,168);
+    }
+  }
+
   if(room == 1 && !Light){
     fill(0,70);
     rect(0,0,width,height);
@@ -532,6 +585,27 @@ void OnHitbox(int id){
       break;
     }
   }
+  if(PanelOn){
+    switch(id){
+      case(1):
+        PanelOn = false;
+      break;
+
+      case(2):
+        if(Inventory[SelectItem] == 1){
+          Mask[0] = true;
+          Inventory[SelectItem] = 0;
+          if(Mask[0] && Mask[1] && Mask[2]){
+            ChangeElementsById(88,89);
+          }
+          Load();
+        }
+      break;
+
+      default:
+      break;
+    }
+  }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
     ChangeElementsById(id,0);
@@ -545,6 +619,11 @@ void OnHitbox(int id){
             Inventory[SelectItem] = 0;
           break;
           
+          case(41):
+            DoorMatrice[room][facing][0] = 62;
+            Inventory[SelectItem] = 0;
+          break;
+
           default:
           break;
 
@@ -595,6 +674,14 @@ void OnHitbox(int id){
     case(87):
       InventoryAdd(4);
       ChangeDresserElementsById(87,0);
+    break;
+
+    case(88):
+      PanelOn = true;
+    break;
+
+    case(89):
+      PanelOn = true;
     break;
 
     default:
