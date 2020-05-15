@@ -502,11 +502,16 @@ void SpecialLoad() {
   }
   if(room == 2 && BlackLight && Elements[2][5][0] == 87){
     if(facing < 4){
-      PImage BlackLightImage = loadImage("Others/Blacklight/BlacklightFacing-" + str(facing) + ".png");
-      image(BlackLightImage,0,0,1600,900);
+      if(PanelOn){
+        PImage BlackLightImageCeiling = loadImage("Others/Blacklight/BlacklightCeiling.png");
+        image(BlackLightImageCeiling,0,0,1600,900);
+      } else {
+        PImage BlackLightImage = loadImage("Others/Blacklight/BlacklightFacing-" + str(facing) + ".png");
+        image(BlackLightImage,0,0,1600,900);
+      }
     } else {
       PImage BlackLightImageCeiling = loadImage("Others/Blacklight/BlacklightCeiling.png");
-      image(BlackLightImageCeiling,350,0,900,900);
+      image(BlackLightImageCeiling,0,0,1600,900);
     }
   }
   if(Inv){
