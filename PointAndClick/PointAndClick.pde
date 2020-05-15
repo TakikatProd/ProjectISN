@@ -40,6 +40,7 @@ PImage MaskCable[] = new PImage[3];
 
 //Special var
 boolean Light = false;
+boolean BlackLight = false;
 boolean Menu = true;
 
 boolean DresserOn = false;
@@ -80,7 +81,7 @@ int[][][] Elements =
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
   {{0},  {82,4,4},  {83,5,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{88,4,4},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
+  {{88,4,4},  {0},  {0},  {0},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -352,6 +353,23 @@ void Load(){
           AddHitbox(Elements[room][facing][i + 1] * 100 + 2, Elements[room][facing][i + 2] * 100 + 5, 195, 95, 84);
         break;
 
+        case(86):
+          if(BlackLight){
+            image(BulbLamp[1], Elements[room][facing][i + 1] * 100 + 10, Elements[room][facing][i + 2] * 100 + 10, 80, 80);
+          } else {
+            image(BulbLamp[0], Elements[room][facing][i + 1] * 100 + 10, Elements[room][facing][i + 2] * 100 + 10, 80, 80);
+          }
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 10, Elements[room][facing][i + 2] * 100 + 10, 80, 80, 86);
+        break;
+
+        case(87):
+          if(BlackLight){
+            image(BlackLamp[1], Elements[room][facing][i + 1] * 100 + 10, Elements[room][facing][i + 2] * 100 + 10, 80, 80);
+          } else {
+            image(BlackLamp[0], Elements[room][facing][i + 1] * 100 + 10, Elements[room][facing][i + 2] * 100 + 10, 80, 80);
+          }
+        break;
+
         case(88):
           image(ElecPanelOff[0], Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192);
           AddHitbox(Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192, 88);
@@ -477,6 +495,16 @@ void SpecialLoad() {
   if(room == 1 && !Light){
     fill(0,70);
     rect(0,0,width,height);
+  }
+  if(room == 2 && !BlackLight){
+    if(Elements[2][5][0] == 86){
+      fill(0,70);
+      rect(0,0,width,height);
+    } else {
+      if(facing < 4){
+        BlackLightImage = loadImage("");
+      }
+    }
   }
   if(Inv){
     InventoryPrint();
@@ -608,8 +636,8 @@ void OnHitbox(int id){
             Inventory[SelectItem] = 0;
             if(Mask[0] && Mask[1] && Mask[2]){
               ChangeElementsById(88,89);
+              BlackLight = true;
             }
-            Load();
           }
         }
       break;
@@ -621,8 +649,8 @@ void OnHitbox(int id){
             Inventory[SelectItem] = 0;
             if(Mask[0] && Mask[1] && Mask[2]){
               ChangeElementsById(88,89);
+              BlackLight = true;
             }
-            Load();
           }
         }
       break;
@@ -634,8 +662,8 @@ void OnHitbox(int id){
             Inventory[SelectItem] = 0;
             if(Mask[0] && Mask[1] && Mask[2]){
               ChangeElementsById(88,89);
+              BlackLight = true;
             }
-            Load();
           }
         }
       break;
@@ -707,6 +735,15 @@ void OnHitbox(int id){
     case(85):
       InventoryAdd(2);
       ChangeDresserElementsById(85,0);
+    break;
+
+    case(86):
+      if(SelectItem != 10){
+        if(Inventory[SelectItem] == 4){
+          ChangeElementsById(86,87);
+          Inventory[SelectItem] = 0;
+        }
+      }
     break;
 
     case(87):
@@ -817,6 +854,10 @@ void MenuLoad(){
     if(PanelMaskLoad[i].charAt(0) == '1'){
       Mask[i] = true;
     }
+  }
+
+  if(Elements[2][0][0] == 89){
+    BlackLight = true;
   }
 }
 
