@@ -497,13 +497,16 @@ void SpecialLoad() {
     rect(0,0,width,height);
   }
   if(room == 2 && !BlackLight){
-    if(Elements[2][5][0] == 86){
-      fill(0,70);
-      rect(0,0,width,height);
+    fill(0,70);
+    rect(0,0,width,height);
+  }
+  if(room == 2 && BlackLight && Elements[2][5][0] == 87){
+    if(facing < 4){
+      PImage BlackLightImage = loadImage("Others/Blacklight/BlacklightFacing-" + str(facing) + ".png");
+      image(BlackLightImage,0,0,1600,900);
     } else {
-      if(facing < 4){
-        BlackLightImage = loadImage("");
-      }
+      PImage BlackLightImageCeiling = loadImage("Others/Blacklight/BlacklightCeiling.png");
+      image(BlackLightImageCeiling,350,0,900,900);
     }
   }
   if(Inv){
