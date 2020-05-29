@@ -948,4 +948,11 @@ void Piano(char NewNote){
   if(NoteID == 6){
     return;
   }
+  Note[NoteID] = NewNote;
+  NoteID++;
+  if(NoteID == 6){
+    if(Note == {'F', 'A', 'G', 'E', 'D', 'G'}){
+      //Do something
+    }
+  }
 }
