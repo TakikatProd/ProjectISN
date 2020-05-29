@@ -59,6 +59,8 @@ boolean PanelOn = false;
 boolean Mask[] = new boolean[3];
 
 boolean PianoOn = false;
+char Note[] = new char[6];
+int NoteID = 0;
 
 //Tutorial
 PImage[] Tutorial = new PImage[3];
@@ -968,4 +970,17 @@ void Save(){
   List[6] = PanelMaskSave;
 
   saveStrings("File.txt", List);
+}
+
+void Piano(char NewNote){
+  if(NoteID == 6){
+    return;
+  }
+  Note[NoteID] = NewNote;
+  NoteID++;
+  if(NoteID == 6){
+    if(Note == {'F', 'A', 'G', 'E', 'D', 'G'}){
+      //Do something
+    }
+  }
 }
