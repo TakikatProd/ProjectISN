@@ -28,6 +28,8 @@ PImage BulbLamp[] = new PImage[2]; //id 86
 PImage BlackLamp[] = new PImage[2]; //id 87
 PImage ElecPanelOff[] = new PImage[2]; //id 88
 PImage ElecPanelOn[] = new PImage[2]; //id 89
+PImage Clavier; //id 90
+PImage Piano; //id 91
 
 //other
 PImage ExitArrow;
@@ -56,6 +58,8 @@ int IdDresser = 0;
 boolean PanelOn = false;
 boolean Mask[] = new boolean[3];
 
+boolean PianoOn = false;
+
 //Tutorial
 PImage[] Tutorial = new PImage[3];
 
@@ -80,8 +84,8 @@ int Fade = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{0},  {82,4,4},  {83,5,7},  {84,5,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{88,4,4},  {0},  {0},  {0},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}}
+  {{4,6,6},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{88,4,4, 4,8,6},  {4,3,6},  {91,7,5, 4,1,3},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}}
 };
 int[][][] DoorMatrice = 
 {
@@ -126,6 +130,8 @@ void setup(){
   MaskCable[0] = loadImage("/Object/Others/Panel/YellowCorrec.png");
   MaskCable[1] = loadImage("/Object/Others/Panel/RedCorrec.png");
   MaskCable[2] = loadImage("/Object/Others/Panel/GreenCorrec.png");
+  Clavier = loadImage("/Object/Interactible/Clavier.png");
+  Piano = loadImage("/Object/Interactible/Piano.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -198,7 +204,7 @@ void keyPressed(){
     Inv = !Inv;
     Load();
  }
- if(DresserOn || PanelOn){
+ if(DresserOn || PanelOn || PianoOn){
    return;
  }
   switch(keyCode){
@@ -380,6 +386,11 @@ void Load(){
           AddHitbox(Elements[room][facing][i + 1] * 100 + 28, Elements[room][facing][i + 2] * 100 + 4, 144, 192, 89);
         break;
 
+        case(91):
+          image(Piano,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 98, 200, 206);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100 + 98, 200, 206,91);
+        break;
+
         default:
         break;
       }
@@ -416,14 +427,17 @@ void Load(){
 }
 
 void SpecialLoad() {
-  if(DresserOn){
+  if(DresserOn || PanelOn || PianoOn){
     NbElements = 0;
-    IdDresser = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
       image(Tile, i * 400, 400, 400, 400);
       image(Tile, i * 400, 800, 400, 400);
     }
+  }
+  
+  if(DresserOn){
+    IdDresser = 0;
     image(ExitArrow, 10, 10, 160, 120);
     AddHitbox(10, 10, 160, 120, 1);
     if(room == 1 && facing == 3){
@@ -454,12 +468,6 @@ void SpecialLoad() {
   }
 
   if(PanelOn){
-    NbElements = 0;
-    for(int i = 0; i < 4; i++){
-      image(Tile, i * 400, 0, 400, 400);
-      image(Tile, i * 400, 400, 400, 400);
-      image(Tile, i * 400, 800, 400, 400);
-    }
     image(ExitArrow, 10, 10, 160, 120);
     AddHitbox(10, 10, 160, 120, 1);
     boolean PanelFonction = false;
@@ -475,21 +483,26 @@ void SpecialLoad() {
         image(MaskCable[0],608,260,48,168);
       }
       else{
-        AddHitbox(608,260,48,168,2);
+        AddHitbox(558,210,148,168,2);
       }
       if(Mask[1]){
         image(MaskCable[1],943,501,48,240);
       }
       else{
-        AddHitbox(943,501,48,240,3);
+        AddHitbox(893,451,148,340,3);
       }
       if(Mask[2]){
         image(MaskCable[2],944,188,48,216);
       }
       else{
-        AddHitbox(944,188,48,216,4);
+        AddHitbox(894,138,148,266,4);
       }
     }
+  }
+  if (PianoOn){
+    AddHitbox(10, 10, 160, 120, 1);
+    image(Clavier,0,9,1600,883);
+    image(ExitArrow, 10, 10, 160, 120);
   }
 
   if(room == 1 && !Light){
@@ -680,6 +693,16 @@ void OnHitbox(int id){
       break;
     }
   }
+  if (PianoOn){
+    switch(id){
+      case(1):
+        PianoOn = false;
+      break;
+
+      default:
+      break;
+    }
+  }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
     ChangeElementsById(id,0);
@@ -767,8 +790,14 @@ void OnHitbox(int id){
       PanelOn = true;
     break;
 
+    case(91):
+      PianoOn = true;
+    break;
+
     default:
     break;
+
+ 
   }
 }
 
