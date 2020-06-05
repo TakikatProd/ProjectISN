@@ -986,6 +986,7 @@ void Save(){
   saveStrings("File.txt", List);
 }
 
+void Piano(char NewNote){
   if(NoteID == 6){
     return;
   }
