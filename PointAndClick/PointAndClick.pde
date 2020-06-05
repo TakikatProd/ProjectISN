@@ -979,8 +979,12 @@ void Piano(char NewNote){
   Note[NoteID] = NewNote;
   NoteID++;
   if(NoteID == 6){
-    if(Note == {'F', 'A', 'G', 'E', 'D', 'G'}){
-      //Do something
+    char[] GoodNote = {'F', 'A', 'G', 'E', 'D', 'G'};
+    for(int i = 0; i < 6; i++){
+      if(Note[i] != GoodNote[i]){
+        return;
+      }
     }
+    //Do something
   }
 }
