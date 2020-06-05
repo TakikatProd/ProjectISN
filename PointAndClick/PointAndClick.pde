@@ -524,7 +524,7 @@ void SpecialLoad() {
   }
   if(room == 2 && BlackLight && Elements[2][5][0] == 87){
     if(facing < 4){
-      if(PanelOn){
+      if(PanelOn || PianoOn){
         PImage BlackLightImageCeiling = loadImage("Others/Blacklight/BlacklightCeiling.png");
         image(BlackLightImageCeiling,0,0,1600,900);
       } else {
