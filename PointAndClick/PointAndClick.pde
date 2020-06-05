@@ -510,8 +510,15 @@ void SpecialLoad() {
   }
   if (PianoOn){
     AddHitbox(10, 10, 160, 120, 1);
-    image(Clavier,0,9,1600,883);
+    image(Clavier,0,10,1600,880);
     image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(50,100,150,700,2);
+    AddHitbox(250,100,150,700,3);
+    AddHitbox(450,100,200,700,4);
+    AddHitbox(700,100,150,700,5);
+    AddHitbox(900,100,200,700,6);
+    AddHitbox(1150,100,150,700,7);
+    AddHitbox(1350,100,150,700,8);
   }
 
   if(room == 1 && !Light){
@@ -979,7 +986,6 @@ void Save(){
   saveStrings("File.txt", List);
 }
 
-void Piano(char NewNote){
   if(NoteID == 6){
     return;
   }
