@@ -30,6 +30,7 @@ PImage ElecPanelOff[] = new PImage[2]; //id 88
 PImage ElecPanelOn[] = new PImage[2]; //id 89
 PImage Clavier; //id 90
 PImage Piano; //id 91
+PImage Cable_Green; //id 93
 
 //other
 PImage ExitArrow;
@@ -140,6 +141,7 @@ void setup(){
   Items[3] = loadImage("/Inventor/Items/Cable_Green.png");
   Items[4] = loadImage("/Inventor/Items/BlackLamp.png");
   Cable_red = loadImage("/Inventor/Items/Cable_red.png");
+  Cable_Green = loadImage("/Inventor/Items/Cable_Green.png");
   BulbLamp[0] = loadImage("/Object/Others/Bulb/Lamp_Off.png");
   BulbLamp[1] = loadImage("/Object/Others/Bulb/Lamp_On.png");
   BlackLamp[0] = loadImage("/Object/Others/Bulb/BlackLamp_Off.png");
@@ -992,6 +994,7 @@ void Piano(char NewNote){
         return;
       }
     }
-    //Do something
+    InventoryAdd(1);
+    ChangeElementsById(92, 93);
   }
 }
