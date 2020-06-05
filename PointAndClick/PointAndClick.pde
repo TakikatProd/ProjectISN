@@ -710,9 +710,52 @@ void OnHitbox(int id){
     }
   }
   if (PianoOn){
+    AudioPlayer SonNote;
     switch(id){
       case(1):
         PianoOn = false;
+      break;
+
+      case(2):
+        NoteID = 0;
+        SonNote = minim.loadFile("/Sounds/Music/Notes/C.wav");
+        SonNote.play();
+      break;
+
+      case(3):
+        Piano('D');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/D.wav");
+        SonNote.play();
+      break;
+
+      case(4):
+        Piano('E');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/E.wav");
+        SonNote.play();
+      break;
+
+      case(5):
+        Piano('F');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/F.wav");
+        SonNote.play();
+      break;
+
+      case(6):
+        Piano('G');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/G.wav");
+        SonNote.play();
+      break;
+
+      case(7):
+        Piano('A');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/A.wav");
+        SonNote.play();
+      break;
+
+      case(8):
+        Piano('B');
+        SonNote = minim.loadFile("/Sounds/Music/Notes/B.wav");
+        SonNote.play();
       break;
 
       default:
@@ -993,9 +1036,6 @@ void Piano(char NewNote){
   Note[NoteID] = NewNote;
   NoteID++;
   if(NoteID == 6){
-<<<<<<< HEAD
-    
-=======
     char[] GoodNote = {'F', 'A', 'G', 'E', 'D', 'G'};
     for(int i = 0; i < 6; i++){
       if(Note[i] != GoodNote[i]){
@@ -1003,6 +1043,5 @@ void Piano(char NewNote){
       }
     }
     //Do something
->>>>>>> 7b87a2b95916d99a79ef8cbcfcb96e362bfea8ec
   }
 }
