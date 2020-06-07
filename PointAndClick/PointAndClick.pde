@@ -60,6 +60,7 @@ int IdDresser = 0;
 boolean PanelOn = false;
 boolean Mask[] = new boolean[3];
 
+boolean PianoNote = false;
 boolean PianoOn = false;
 char Note[] = new char[6];
 int NoteID = 0;
@@ -1053,6 +1054,12 @@ void Piano(char NewNote){
         return;
       }
     }
-    ChangeElementsById(92, 93);
+    if(!PianoNote){
+      delay(1000);
+      AudioPlayer Unlock = minim.loadFile("Sounds/UnlockSound.wav");
+      Unlock.play();
+      ChangeElementsById(92, 93);
+      PianoNote = true;
+    }
   }
 }
