@@ -122,7 +122,8 @@ int[][][] DoorMatrice =
 void setup(){
   size(1600,900);
 
-  myFont = loadFont("Others/font.ttf");
+  myFont = createFont("font.TTF", 64);
+  textFont(myFont);
   minim = new Minim(this);
   //Load Picture
   BaseTile = loadImage("/Others/BaseTile.png");
@@ -180,6 +181,7 @@ void setup(){
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
+  Items[22] = loadImage("/Inventor/Items/Key_1.png");
   Key[0] = loadImage("/Inventor/Items/Key_0.png");
   Key[1] = loadImage("/Inventor/Items/Key_1.png");
   Key[2] = loadImage("/Inventor/Items/Key_2.png");
@@ -591,6 +593,11 @@ void SpecialLoad() {
     AddHitbox(680,480,100,150,3);
     AddHitbox(820,480,100,150,4);
     AddHitbox(940,480,100,150,5);
+    fill(0);
+    text(str(Code1[0]),595,580);
+    text(str(Code1[1]),715,580);
+    text(str(Code1[2]),855,580);
+    text(str(Code1[3]),975,580);
   }
 
   if(room == 1 && !Light){
@@ -841,15 +848,44 @@ void OnHitbox(int id){
       break;
 
       case(2):
-        Code1[0] ++;
-        if(Code1[0] > 10){
-          Code1[0] = 0
+        Code1[0]++;
+        if(Code1[0] > 9){
+          Code1[0] = 0;
+        }
+      break;
+
+      case(3):
+        Code1[1]++;
+        if(Code1[1] > 9){
+          Code1[1] = 0;
+        }
+      break;
+
+      case(4):
+        Code1[2]++;
+        if(Code1[2] > 9){
+          Code1[2] = 0;
+        }
+      break;
+
+      case(5):
+        Code1[3]++;
+        if(Code1[3] > 9){
+          Code1[3] = 0;
         }
       break;
 
       default:
       break;
     }
+    int[] GoodCode = {4, 5, 3, 1};
+    for(int i = 0; i < 4; i++){
+      if(Code1[i] != GoodCode[i]){
+        return;
+      }
+    }
+    CodeLock = false;
+    ChangeElementsById(95, 22);
   }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
@@ -891,6 +927,11 @@ void OnHitbox(int id){
 
     case(-3):
       exit();
+    break;
+
+    case(22):
+      InventoryAdd(22);
+      ChangeElementsById(22, 0);
     break;
 
     case(80):
