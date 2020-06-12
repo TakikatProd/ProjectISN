@@ -4,6 +4,7 @@ AudioPlayer Ambiance;
 
 int facing = 0;
 int room = 0;
+int[] Code1 = {0,0,0,0};
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
@@ -35,6 +36,9 @@ PImage Cable_Green; //id 93
 PImage Gramophone; //id 94
 PImage LockBox2; //id 95
 PImage LockPad; //id 96
+PImage Stand; //97
+PImage Cup; //98
+PImage Crowbar; //99
 
 //other
 PImage ExitArrow;
@@ -90,17 +94,26 @@ boolean Change = false;
 int PhaseTuto = 0;
 int Fade = 0;
 
+//Animation
+PImage[] Animation = new PImage[14];
+boolean AnimationOn = true;
+int AnimationSequence = 0;
+
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
   {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}}
+  {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
+  {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
+  {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
   {{40,7,6},  {0}, {0}, {0}},
   {{0},  {41,9,5}, {60,7,6}, {0}},
   {{0},  {0}, {0}, {61,7,6}},
+  {{0},  {0}, {0}, {0}},
+  {{0},  {0}, {0}, {0}}
 };
 
 void setup(){
@@ -145,6 +158,9 @@ void setup(){
   LockBox2 = loadImage("/Object/Others/BoiteLock.png");
   Gramophone = loadImage("/Object/Interactible/Phonographe.png");
   LockPad = loadImage("/Object/Interactible/LockpadNumber.png");
+  Stand = loadImage("EndAnimation/Stand.png");
+  Cup = loadImage("EndAnimation/Cup.png");
+  Crowbar = loadImage("Inventor/Items/Crowbar.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -171,6 +187,10 @@ void setup(){
   ExitGame = loadImage("/Others/ExitGame.png");
   MenuBG = loadImage("/Others/MenuBG.png");
   MenuTitle = loadImage("/Others/MenuTitle.png");
+
+  for(int i = 0; i < 14; i++){
+    Animation[i] = loadImage("EndAnimation/Animation/tile" + str(i) + ".png");
+  }
 
   cursor(Cursor, 16, 16);
   MenuPrint();
@@ -207,6 +227,20 @@ void draw(){
   if (!Ambiance.isPlaying()){
     Ambiance.setGain(-30);
     Ambiance.loop();
+  }
+  
+  if(AnimationOn){
+    for(int x = 0; x < 2; x++){
+      for(int y = 0; y < 2; y++){
+        image(Tile, 200 + 100 * x, 00 + 100 * y, 100, 100);
+      }
+    }
+    image(Animation[AnimationSequence], 200, 28, 200, 172);
+    delay(100);
+    AnimationSequence++;
+    if(AnimationSequence == 14){
+      AnimationOn = false;
+    }
   }
 }
 
@@ -549,6 +583,10 @@ void SpecialLoad() {
     AddHitbox(10, 10, 160, 120, 1);
     image(LockPad,480,130,640,640);
     image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(560,480,100,150,2);
+    AddHitbox(680,480,100,150,3);
+    AddHitbox(820,480,100,150,4);
+    AddHitbox(940,480,100,150,5);
   }
 
   if(room == 1 && !Light){
@@ -796,6 +834,13 @@ void OnHitbox(int id){
     switch(id){
       case(1):
         CodeLock = false;
+      break;
+
+      case(2):
+        Code1[0] ++;
+        if(Code1[0] > 10){
+          Code1[0] = 0
+        }
       break;
 
       default:
