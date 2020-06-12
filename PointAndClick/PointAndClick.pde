@@ -8,6 +8,9 @@ int[] Code1 = {0,0,0,0};
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
+PImage BaseTile;
+
+PFont myFont;
 //Item
 PImage Door; //id 40-59
 PImage OpenDoor; //id 60-79
@@ -119,8 +122,10 @@ int[][][] DoorMatrice =
 void setup(){
   size(1600,900);
 
+  myFont = loadFont("Others/font.ttf");
   minim = new Minim(this);
   //Load Picture
+  BaseTile = loadImage("/Others/BaseTile.png");
   Tile = loadImage("/Others/Tile.png");
   Door = loadImage("/Object/Interactible/Porte.png");
   OpenDoor = loadImage("/Object/Interactible/OpenDoor.png");
@@ -230,11 +235,10 @@ void draw(){
   }
   
   if(AnimationOn){
-    for(int x = 0; x < 2; x++){
-      for(int y = 0; y < 2; y++){
-        image(Tile, 200 + 100 * x, 00 + 100 * y, 100, 100);
-      }
-    }
+    image(Tile, 200, 00, 100, 100);
+    image(Tile, 200 + 100, 00, 100, 100);
+    image(BaseTile, 200 , 00 + 100, 100, 100);
+    image(BaseTile, 200 + 100, 00 + 100, 100, 100);
     image(Animation[AnimationSequence], 200, 28, 200, 172);
     delay(100);
     AnimationSequence++;
