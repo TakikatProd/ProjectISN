@@ -117,8 +117,7 @@ int[][][] DoorMatrice =
 
 void setup(){
   size(1600,900);
-
-  myFont = loadFont("Others/font.ttf");
+  
   minim = new Minim(this);
   //Load Picture
   BaseTile = loadImage("/Others/BaseTile.png");
