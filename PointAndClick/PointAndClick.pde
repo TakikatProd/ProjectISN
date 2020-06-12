@@ -32,6 +32,9 @@ PImage Clavier; //id 90
 PImage Piano; //id 91
 PImage LockBox; //id 92 
 PImage Cable_Green; //id 93
+PImage Stand; //94
+PImage Cup; //95
+PImage Crowbar; //96
 
 //other
 PImage ExitArrow;
@@ -90,13 +93,17 @@ int[][][] Elements =
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
   {{4,6,6},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{88,4,4, 4,8,6},  {4,3,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}}
+  {{88,4,4, 4,8,6},  {4,3,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
+  {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
+  {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
   {{40,7,6},  {0}, {0}, {0}},
   {{0},  {41,9,5}, {60,7,6}, {0}},
   {{0},  {0}, {0}, {61,7,6}}
+  {{0},  {0}, {0}, {0}}
+  {{0},  {0}, {0}, {0}}
 };
 
 void setup(){
@@ -138,6 +145,9 @@ void setup(){
   Clavier = loadImage("/Object/Interactible/Clavier.png");
   Piano = loadImage("/Object/Interactible/Piano.png");
   LockBox = loadImage("/Object/Others/BoiteLock.png");
+  Stand = loadImage("EndAnimation/Stand.png");
+  Cup = loadImage("EndAnimation/Cup.png");
+  Crowbar = loadImage("Inventor/Items/Crowbar.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
