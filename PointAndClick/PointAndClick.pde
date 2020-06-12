@@ -32,9 +32,10 @@ PImage Clavier; //id 90
 PImage Piano; //id 91
 PImage LockBox; //id 92 
 PImage Cable_Green; //id 93
-PImage Stand; //94
-PImage Cup; //95
-PImage Crowbar; //96
+PImage Gramophone; //id 94
+PImage Stand; //95
+PImage Cup; //96
+PImage Crowbar; //97
 
 //other
 PImage ExitArrow;
@@ -93,7 +94,7 @@ int[][][] Elements =
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
   {{4,6,6},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
-  {{88,4,4, 4,8,6},  {4,3,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
+  {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
 };
@@ -145,6 +146,7 @@ void setup(){
   Clavier = loadImage("/Object/Interactible/Clavier.png");
   Piano = loadImage("/Object/Interactible/Piano.png");
   LockBox = loadImage("/Object/Others/BoiteLock.png");
+  Gramophone = loadImage("/Object/Interactible/Phonographe.png");
   Stand = loadImage("EndAnimation/Stand.png");
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
@@ -415,6 +417,11 @@ void Load(){
         case(93):
           image(Cable_Green,Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50);
           AddHitbox(Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50, 93);
+        break;
+
+        case(94):
+          image(Gramophone,Elements[room][facing][i+1] * 100 - 15, Elements[room][facing][i+2] * 100 - 15, 125, 125);
+          AddHitbox(Elements[room][facing][i+1] * 100 - 15, Elements[room][facing][i+2] * 100 - 15, 125, 125, 94);
         break;
 
         default:
@@ -873,6 +880,11 @@ void OnHitbox(int id){
     case(93):
       InventoryAdd(3);
       ChangeElementsById(93,0);
+    break;
+
+    case(94):
+      AudioPlayer MusiqueSaxo = minim.loadFile("/Sounds/Music/Phonograph.wav");
+      MusiqueSaxo.play();
     break;
 
     default:
