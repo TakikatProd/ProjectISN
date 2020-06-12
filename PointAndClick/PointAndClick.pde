@@ -90,6 +90,11 @@ boolean Change = false;
 int PhaseTuto = 0;
 int Fade = 0;
 
+//Animation
+PImage[] Animation = new PImage[14];
+boolean AnimationOn = true;
+int AnimationSequence = 0;
+
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
@@ -176,6 +181,10 @@ void setup(){
   MenuBG = loadImage("/Others/MenuBG.png");
   MenuTitle = loadImage("/Others/MenuTitle.png");
 
+  for(int i = 0; i < 14; i++){
+    Animation[i] = loadImage("EndAnimation/Animation/tile" + str(i) + ".png");
+  }
+
   cursor(Cursor, 16, 16);
   MenuPrint();
 }
@@ -211,6 +220,20 @@ void draw(){
   if (!Ambiance.isPlaying()){
     Ambiance.setGain(-30);
     Ambiance.loop();
+  }
+  
+  if(AnimationOn){
+    for(int x = 0; x < 2; x++){
+      for(int y = 0; y < 2; y++){
+        image(Tile, 200 + 100 * x, 00 + 100 * y, 100, 100);
+      }
+    }
+    image(Animation[AnimationSequence], 200, 28, 200, 172);
+    delay(100);
+    AnimationSequence++;
+    if(AnimationSequence == 14){
+      AnimationOn = false;
+    }
   }
 }
 
