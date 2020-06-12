@@ -4,6 +4,7 @@ AudioPlayer Ambiance;
 
 int facing = 0;
 int room = 0;
+int[] Code1 = {0,0,0,0};
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
@@ -36,9 +37,11 @@ PImage Piano; //id 91
 PImage LockBox; //id 92 
 PImage Cable_Green; //id 93
 PImage Gramophone; //id 94
-PImage Stand; //95
-PImage Cup; //96
-PImage Crowbar; //97
+PImage LockBox2; //id 95
+PImage LockPad; //id 96
+PImage Stand; //97
+PImage Cup; //98
+PImage Crowbar; //99
 
 //other
 PImage ExitArrow;
@@ -69,6 +72,7 @@ boolean Mask[] = new boolean[3];
 
 boolean PianoNote = false;
 boolean PianoOn = false;
+boolean CodeLock = false;
 char Note[] = new char[6];
 int NoteID = 0;
 
@@ -101,7 +105,7 @@ int AnimationSequence = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{4,6,6},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
   {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
@@ -117,7 +121,9 @@ int[][][] DoorMatrice =
 
 void setup(){
   size(1600,900);
-  
+
+  myFont = createFont("font.TTF", 64);
+  textFont(myFont);
   minim = new Minim(this);
   //Load Picture
   BaseTile = loadImage("/Others/BaseTile.png");
@@ -155,7 +161,9 @@ void setup(){
   Clavier = loadImage("/Object/Interactible/Clavier.png");
   Piano = loadImage("/Object/Interactible/Piano.png");
   LockBox = loadImage("/Object/Others/BoiteLock.png");
+  LockBox2 = loadImage("/Object/Others/BoiteLock.png");
   Gramophone = loadImage("/Object/Interactible/Phonographe.png");
+  LockPad = loadImage("/Object/Interactible/LockpadNumber.png");
   Stand = loadImage("EndAnimation/Stand.png");
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
@@ -173,8 +181,10 @@ void setup(){
 
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
+  Items[22] = loadImage("/Inventor/Items/Key_2.png");
   Key[0] = loadImage("/Inventor/Items/Key_0.png");
   Key[1] = loadImage("/Inventor/Items/Key_1.png");
+  Key[2] = loadImage("/Inventor/Items/Key_2.png");
 
   ExitArrow = loadImage("/Others/Exit_Arrow.png");
   Ambiance = minim.loadFile("/Sounds/Music/Man Down.wav");
@@ -450,6 +460,11 @@ void Load(){
           AddHitbox(Elements[room][facing][i+1] * 100 - 15, Elements[room][facing][i+2] * 100 - 15, 125, 125, 94);
         break;
 
+        case(95):
+          image(LockBox2,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
+        break;
+
         default:
         break;
       }
@@ -486,7 +501,7 @@ void Load(){
 }
 
 void SpecialLoad() {
-  if(DresserOn || PanelOn || PianoOn){
+  if(DresserOn || PanelOn || PianoOn || CodeLock){
     NbElements = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
@@ -569,6 +584,20 @@ void SpecialLoad() {
     AddHitbox(900,100,200,700,6);
     AddHitbox(1150,100,150,700,7);
     AddHitbox(1350,100,150,700,8);
+  }
+  if (CodeLock){
+    AddHitbox(10, 10, 160, 120, 1);
+    image(LockPad,480,130,640,640);
+    image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(560,480,100,150,2);
+    AddHitbox(680,480,100,150,3);
+    AddHitbox(820,480,100,150,4);
+    AddHitbox(940,480,100,150,5);
+    fill(0);
+    text(str(Code1[0]),595,580);
+    text(str(Code1[1]),715,580);
+    text(str(Code1[2]),855,580);
+    text(str(Code1[3]),975,580);
   }
 
   if(room == 1 && !Light){
@@ -812,6 +841,52 @@ void OnHitbox(int id){
       break;
     }
   }
+  if (CodeLock){
+    switch(id){
+      case(1):
+        CodeLock = false;
+      break;
+
+      case(2):
+        Code1[0]++;
+        if(Code1[0] > 9){
+          Code1[0] = 0;
+        }
+      break;
+
+      case(3):
+        Code1[1]++;
+        if(Code1[1] > 9){
+          Code1[1] = 0;
+        }
+      break;
+
+      case(4):
+        Code1[2]++;
+        if(Code1[2] > 9){
+          Code1[2] = 0;
+        }
+      break;
+
+      case(5):
+        Code1[3]++;
+        if(Code1[3] > 9){
+          Code1[3] = 0;
+        }
+      break;
+
+      default:
+      break;
+    }
+    int[] GoodCode = {4, 5, 3, 1};
+    for(int i = 0; i < 4; i++){
+      if(Code1[i] != GoodCode[i]){
+        return;
+      }
+    }
+    CodeLock = false;
+    ChangeElementsById(95, 22);
+  }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
     ChangeElementsById(id,0);
@@ -852,6 +927,11 @@ void OnHitbox(int id){
 
     case(-3):
       exit();
+    break;
+
+    case(22):
+      InventoryAdd(22);
+      ChangeElementsById(22, 0);
     break;
 
     case(80):
@@ -911,6 +991,10 @@ void OnHitbox(int id){
     case(94):
       AudioPlayer MusiqueSaxo = minim.loadFile("/Sounds/Music/Phonograph.wav");
       MusiqueSaxo.play();
+    break;
+
+    case(95):
+      CodeLock = true;
     break;
 
     default:
