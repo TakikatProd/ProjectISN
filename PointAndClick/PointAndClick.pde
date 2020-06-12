@@ -7,6 +7,7 @@ int room = 0;
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
+PImage BaseTile;
 //Item
 PImage Door; //id 40-59
 PImage OpenDoor; //id 60-79
@@ -117,6 +118,7 @@ void setup(){
 
   minim = new Minim(this);
   //Load Picture
+  
   Tile = loadImage("/Others/Tile.png");
   Door = loadImage("/Object/Interactible/Porte.png");
   OpenDoor = loadImage("/Object/Interactible/OpenDoor.png");
