@@ -397,11 +397,11 @@ void Load(){
         case(82):
           if(Light){
             image(Lever[1], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
+            AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
           }
           else{
             image(Lever[0], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
           }
-          AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
         break;
 
         case(83):
