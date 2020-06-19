@@ -45,6 +45,7 @@ PImage Cup; //98
 PImage Crowbar; //99
 PImage ShapeBox; //100
 PImage ShapePad; //101
+PImage CrowbarTile; //102
 
 //other
 PImage ExitArrow;
@@ -109,7 +110,7 @@ int AnimationSequence = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{4,6,6, 95,12,7, 100,5,5},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6, 102,8,4},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
   {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
@@ -118,7 +119,7 @@ int[][][] DoorMatrice =
 {
   {{40,7,6},  {0}, {0}, {0}},
   {{0},  {41,9,5}, {60,7,6}, {0}},
-  {{42,7,6},  {0}, {0}, {61,7,6}},
+  {{42,9,6},  {0}, {0}, {61,7,6}},
   {{0},  {62, 7, 6}, {0}, {0}},
   {{0},  {0}, {0}, {0}}
 };
@@ -173,6 +174,8 @@ void setup(){
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
