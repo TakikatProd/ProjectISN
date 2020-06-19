@@ -979,6 +979,7 @@ void OnHitbox(int id){
     break;
 
     case(93):
+      InventoryAdd(3);
       ChangeElementsById(93,0);
     break;
 
