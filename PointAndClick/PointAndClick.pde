@@ -45,6 +45,7 @@ PImage Cup; //98
 PImage Crowbar; //99
 PImage ShapeBox; //100
 PImage ShapePad; //101
+PImage CrowbarTile; //102
 
 //other
 PImage ExitArrow;
@@ -173,6 +174,7 @@ void setup(){
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
