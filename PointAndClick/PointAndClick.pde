@@ -5,6 +5,7 @@ AudioPlayer Ambiance;
 int facing = 0;
 int room = 0;
 int[] Code1 = {0,0,0,0};
+int[] Code2 = {0,0,0,0};
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
@@ -42,6 +43,8 @@ PImage LockPad; //id 96
 PImage Stand; //97
 PImage Cup; //98
 PImage Crowbar; //99
+PImage ShapeBox; //100
+PImage ShapePad; //101
 
 //other
 PImage ExitArrow;
@@ -73,6 +76,7 @@ boolean Mask[] = new boolean[3];
 boolean PianoNote = false;
 boolean PianoOn = false;
 boolean CodeLock = false;
+boolean ShapeCode = false;
 char Note[] = new char[6];
 int NoteID = 0;
 
@@ -114,7 +118,7 @@ int[][][] DoorMatrice =
 {
   {{40,7,6},  {0}, {0}, {0}},
   {{0},  {41,9,5}, {60,7,6}, {0}},
-  {{42,9,6},  {0}, {0}, {61,7,6}},
+  {{42,7,6},  {0}, {0}, {61,7,6}},
   {{0},  {62, 7, 6}, {0}, {0}},
   {{0},  {0}, {0}, {0}}
 };
@@ -167,6 +171,8 @@ void setup(){
   Stand = loadImage("EndAnimation/Stand.png");
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
+  ShapeBox = loadImage("/Object/Others/BoiteLock.png");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -501,7 +507,7 @@ void Load(){
 }
 
 void SpecialLoad() {
-  if(DresserOn || PanelOn || PianoOn || CodeLock){
+  if(DresserOn || PanelOn || PianoOn || CodeLock || ShapeCode){
     NbElements = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
@@ -598,6 +604,20 @@ void SpecialLoad() {
     text(str(Code1[1]),715,580);
     text(str(Code1[2]),855,580);
     text(str(Code1[3]),975,580);
+  }
+  if(ShapeCode){
+    AddHitbox(10, 10, 160, 120, 1);
+    image(ShapePad,480,130,640,640);
+    image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(560,480,100,150,2);
+    AddHitbox(680,480,100,150,3);
+    AddHitbox(820,480,100,150,4);
+    AddHitbox(940,480,100,150,5);
+    fill(0);
+    text(str(Code2[0]),595,580);
+    text(str(Code2[1]),715,580);
+    text(str(Code2[2]),855,580);
+    text(str(Code2[3]),975,580);
   }
 
   if(room == 1 && !Light){
@@ -872,6 +892,52 @@ void OnHitbox(int id){
         Code1[3]++;
         if(Code1[3] > 9){
           Code1[3] = 0;
+        }
+      break;
+
+      default:
+      break;
+    }
+    int[] GoodCode = {4, 5, 3, 1};
+    for(int i = 0; i < 4; i++){
+      if(Code1[i] != GoodCode[i]){
+        return;
+      }
+    }
+    CodeLock = false;
+    ChangeElementsById(95, 22);
+  }
+  if (ShapeCode){
+    switch(id){
+      case(1):
+        ShapeCode = false;
+      break;
+
+      case(2):
+        Code2[0]++;
+        if(Code2[0] > 9){
+          Code2[0] = 0;
+        }
+      break;
+
+      case(3):
+        Code2[1]++;
+        if(Code2[1] > 9){
+          Code2[1] = 0;
+        }
+      break;
+
+      case(4):
+        Code2[2]++;
+        if(Code2[2] > 9){
+          Code2[2] = 0;
+        }
+      break;
+
+      case(5):
+        Code2[3]++;
+        if(Code2[3] > 9){
+          Code2[3] = 0;
         }
       break;
 
