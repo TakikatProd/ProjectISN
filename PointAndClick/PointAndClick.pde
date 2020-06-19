@@ -109,7 +109,7 @@ int AnimationSequence = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{4,6,6, 95,12,7, 100,5,5},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
   {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
@@ -172,7 +172,7 @@ void setup(){
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
-  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -469,6 +469,11 @@ void Load(){
         case(95):
           image(LockBox2,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
+        break;
+
+        case(100):
+          image(ShapeBox,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,100);
         break;
 
         default:
@@ -944,14 +949,14 @@ void OnHitbox(int id){
       default:
       break;
     }
-    int[] GoodCode = {4, 5, 3, 1};
+    int[] GoodShapeCode = {4, 5, 8, 2};
     for(int i = 0; i < 4; i++){
-      if(Code1[i] != GoodCode[i]){
+      if(Code2[i] != GoodShapeCode[i]){
         return;
       }
     }
-    CodeLock = false;
-    ChangeElementsById(95, 22);
+    ShapeCode = false;
+    ChangeElementsById(100, 99);
   }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
@@ -1056,6 +1061,10 @@ void OnHitbox(int id){
 
     case(95):
       CodeLock = true;
+    break;
+
+    case(100):
+      ShapeCode = true;
     break;
 
     default:
