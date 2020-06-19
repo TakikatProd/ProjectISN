@@ -114,8 +114,8 @@ int[][][] DoorMatrice =
 {
   {{40,7,6},  {0}, {0}, {0}},
   {{0},  {41,9,5}, {60,7,6}, {0}},
-  {{0},  {0}, {0}, {61,7,6}},
-  {{0},  {0}, {0}, {0}},
+  {{0},  {0}, {42,8,6}, {61,7,6}},
+  {{0},  {62, 7, 6}, {0}, {0}},
   {{0},  {0}, {0}, {0}}
 };
 
@@ -259,7 +259,7 @@ void keyPressed(){
     Inv = !Inv;
     Load();
  }
- if(DresserOn || PanelOn || PianoOn){
+ if(DresserOn || PanelOn || PianoOn || CodeLock){
    return;
  }
   switch(keyCode){
