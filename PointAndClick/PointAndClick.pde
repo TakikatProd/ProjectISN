@@ -231,7 +231,7 @@ void draw(){
       Fade = 0;
       Change = false;
       //Fin du tuto
-      if(PhaseTuto >= 3){
+      if(PhaseTuto >= 4){
         Tuto = false;
         Load();
       }
