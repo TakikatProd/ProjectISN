@@ -105,7 +105,7 @@ int Fade = 0;
 
 //Animation
 PImage[] Animation = new PImage[14];
-boolean AnimationOn = true;
+boolean AnimationOn = false;
 int AnimationSequence = 0;
 
 int[][][] Elements = 
@@ -114,7 +114,7 @@ int[][][] Elements =
   {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
   {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6, 102,9,2},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{4,11,6, 100,12,7},  {4,3,6},  {4,6,6},  {4,5,6},  {0},  {0},  {0},  {0}},
-  {{4,3,6, 103,8,8},  {4,8,6},  {4,2,6},  {4,13,6},  {0},  {0},  {0},  {0}}
+  {{4,3,6, 103,8,7, 98,8,6},  {4,8,6},  {4,2,6},  {4,13,6},  {0},  {0},  {0},  {0}}
 };
 int[][][] DoorMatrice = 
 {
@@ -251,11 +251,11 @@ void draw(){
   }
   
   if(AnimationOn){
-    image(Tile, 200, 00, 100, 100);
-    image(Tile, 200 + 100, 00, 100, 100);
-    image(BaseTile, 200 , 00 + 100, 100, 100);
-    image(BaseTile, 200 + 100, 00 + 100, 100, 100);
-    image(Animation[AnimationSequence], 200, 28, 200, 172);
+    image(Tile, 300, 600, 100, 100);
+    image(Tile, 300 + 100, 600, 100, 100);
+    image(BaseTile, 300 , 600 + 100, 100, 100);
+    image(BaseTile, 300 + 100, 600 + 100, 100, 100);
+    image(Animation[AnimationSequence], 300, 28 + 600, 200, 172);
     delay(100);
     AnimationSequence++;
     if(AnimationSequence == 14){
