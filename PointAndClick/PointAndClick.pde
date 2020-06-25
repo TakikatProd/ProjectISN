@@ -1166,7 +1166,7 @@ void MenuPrint(){
   AddHitbox(600, 500, 400, 90, -2);
   image(ExitGame, 600, 650, 400, 90);
   AddHitbox(600, 650, 400, 90, -3);
-  image(MenuTitle, 500, 85, 600, 237);
+  image(MenuTitle, 389, 85, 822, 237);
 }
 
 void MenuNew(){
