@@ -985,6 +985,11 @@ void OnHitbox(int id){
             Inventory[SelectItem] = 0;
           break;
 
+          case(42):
+            DoorMatrice[room][facing][0] = 64;
+            Inventory[SelectItem] = 0;
+          break;
+
           default:
           break;
 
