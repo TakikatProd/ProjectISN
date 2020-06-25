@@ -181,7 +181,7 @@ void setup(){
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
   Etagere = loadImage("/Others/Table.png");
-  Credits = loadImage("/Others/Credits.png");
+  Credit = loadImage("/Others/Credits.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
