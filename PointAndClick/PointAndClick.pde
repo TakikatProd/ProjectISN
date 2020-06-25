@@ -171,7 +171,7 @@ void setup(){
   LockPad = loadImage("/Object/Interactible/LockpadNumber.png");
   Stand = loadImage("EndAnimation/Stand.png");
   Cup = loadImage("EndAnimation/Cup.png");
-  Crowbar = loadImage("Inventor/Items/Crowbar.png");
+  Crowbar = loadImage("/Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2");
@@ -181,6 +181,7 @@ void setup(){
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
   Items[3] = loadImage("/Inventor/Items/Cable_Green.png");
   Items[4] = loadImage("/Inventor/Items/BlackLamp.png");
+  Items[5] = loadImage("/Inventor/Items/Crowbar.png");
   Cable_red = loadImage("/Inventor/Items/Cable_red.png");
   Cable_Green = loadImage("/Inventor/Items/Cable_Green.png");
   BulbLamp[0] = loadImage("/Object/Others/Bulb/Lamp_Off.png");
@@ -472,6 +473,11 @@ void Load(){
         case(95):
           image(LockBox2,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
+        break;
+
+        case(99):
+          image(Crowbar,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 120, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 120, 100, 99);
         break;
 
         case(100):
