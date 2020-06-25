@@ -174,7 +174,7 @@ void setup(){
   Crowbar = loadImage("/Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
-  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
@@ -989,6 +989,11 @@ void OnHitbox(int id){
           
           case(41):
             DoorMatrice[room][facing][0] = 62;
+            Inventory[SelectItem] = 0;
+          break;
+
+          case(42):
+            DoorMatrice[room][facing][0] = 64;
             Inventory[SelectItem] = 0;
           break;
 
