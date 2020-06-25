@@ -5,6 +5,7 @@ AudioPlayer Ambiance;
 int facing = 0;
 int room = 0;
 int[] Code1 = {0,0,0,0};
+int[] Code2 = {0,0,0,0};
 boolean Tuto = false;
 PImage BG;
 PImage Tile;
@@ -42,6 +43,9 @@ PImage LockPad; //id 96
 PImage Stand; //97
 PImage Cup; //98
 PImage Crowbar; //99
+PImage ShapeBox; //100
+PImage ShapePad; //101
+PImage CrowbarTile; //102
 
 //other
 PImage ExitArrow;
@@ -73,6 +77,7 @@ boolean Mask[] = new boolean[3];
 boolean PianoNote = false;
 boolean PianoOn = false;
 boolean CodeLock = false;
+boolean ShapeCode = false;
 char Note[] = new char[6];
 int NoteID = 0;
 
@@ -105,7 +110,7 @@ int AnimationSequence = 0;
 int[][][] Elements = 
 {
   {{4,3,6,  2,4,2},  {4,2,6,  1,3,2},  {4,4,5,  3,22,14,  3,24,14,  3,23,12,  3,25,12,  20,13,7},  {4,3,6,  1,4,2,  1,10,2},  {0},  {0},  {0},  {0}},
-  {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
+  {{4,6,6, 95,12,7},  {82,4,4, 4,7,5},  {83,5,7, 4,12,6, 102,8,4},  {84,5,6, 4,2,6},  {80,4,4},  {80,4,4},  {80,4,4},  {80,4,4}},
   {{88,4,4, 4,8,6},  {4,3,6, 5,12,7, 94,12,6},  {91,7,5, 4,1,3, 92, 9, 7},  {4,10,6},  {86,4,4},  {86,4,4},  {86,4,4},  {86,4,4}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}},
   {{0},  {0},  {0},  {0},  {0},  {0},  {0},  {0}}
@@ -167,6 +172,10 @@ void setup(){
   Stand = loadImage("EndAnimation/Stand.png");
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
+  ShapeBox = loadImage("/Object/Others/BoiteLock.png");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
@@ -465,6 +474,11 @@ void Load(){
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
         break;
 
+        case(100):
+          image(ShapeBox,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,100);
+        break;
+
         default:
         break;
       }
@@ -501,7 +515,7 @@ void Load(){
 }
 
 void SpecialLoad() {
-  if(DresserOn || PanelOn || PianoOn || CodeLock){
+  if(DresserOn || PanelOn || PianoOn || CodeLock || ShapeCode){
     NbElements = 0;
     for(int i = 0; i < 4; i++){
       image(Tile, i * 400, 0, 400, 400);
@@ -598,6 +612,20 @@ void SpecialLoad() {
     text(str(Code1[1]),715,580);
     text(str(Code1[2]),855,580);
     text(str(Code1[3]),975,580);
+  }
+  if(ShapeCode){
+    AddHitbox(10, 10, 160, 120, 1);
+    image(ShapePad,480,130,640,640);
+    image(ExitArrow, 10, 10, 160, 120);
+    AddHitbox(560,480,100,150,2);
+    AddHitbox(680,480,100,150,3);
+    AddHitbox(820,480,100,150,4);
+    AddHitbox(940,480,100,150,5);
+    fill(0);
+    text(str(Code2[0]),595,580);
+    text(str(Code2[1]),715,580);
+    text(str(Code2[2]),855,580);
+    text(str(Code2[3]),975,580);
   }
 
   if(room == 1 && !Light){
@@ -887,6 +915,52 @@ void OnHitbox(int id){
     CodeLock = false;
     ChangeElementsById(95, 22);
   }
+  if (ShapeCode){
+    switch(id){
+      case(1):
+        ShapeCode = false;
+      break;
+
+      case(2):
+        Code2[0]++;
+        if(Code2[0] > 9){
+          Code2[0] = 0;
+        }
+      break;
+
+      case(3):
+        Code2[1]++;
+        if(Code2[1] > 9){
+          Code2[1] = 0;
+        }
+      break;
+
+      case(4):
+        Code2[2]++;
+        if(Code2[2] > 9){
+          Code2[2] = 0;
+        }
+      break;
+
+      case(5):
+        Code2[3]++;
+        if(Code2[3] > 9){
+          Code2[3] = 0;
+        }
+      break;
+
+      default:
+      break;
+    }
+    int[] GoodShapeCode = {4, 5, 8, 2};
+    for(int i = 0; i < 4; i++){
+      if(Code2[i] != GoodShapeCode[i]){
+        return;
+      }
+    }
+    ShapeCode = false;
+    ChangeElementsById(100, 99);
+  }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
     ChangeElementsById(id,0);
@@ -990,6 +1064,10 @@ void OnHitbox(int id){
 
     case(95):
       CodeLock = true;
+    break;
+
+    case(100):
+      ShapeCode = true;
     break;
 
     default:
