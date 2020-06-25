@@ -174,7 +174,7 @@ void setup(){
   Crowbar = loadImage("/Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
-  ShapePad = loadImage("/Object/Interactible/Lockpad_2");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
