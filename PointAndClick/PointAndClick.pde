@@ -254,7 +254,7 @@ void draw(){
     Ambiance.loop();
   }
   
-  if(AnimationOn){
+  if(AnimationOn && AnimationSequence != 14){
     image(Tile, 300, 600, 100, 100);
     image(Tile, 300 + 100, 600, 100, 100);
     image(BaseTile, 300 , 600 + 100, 100, 100);
@@ -265,7 +265,6 @@ void draw(){
     if(AnimationSequence == 14){
       delay(1000);
       image(Credit, 0, 0, 1600, 900);
-      AnimationOn = false;
     }
   }
 }
