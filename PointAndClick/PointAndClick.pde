@@ -55,7 +55,6 @@ PImage NewGame;
 PImage LoadGame;
 PImage ExitGame;
 PImage MenuTitle;
-PImage 
 PImage MaskCable[] = new PImage[3];
 
 //Special var
