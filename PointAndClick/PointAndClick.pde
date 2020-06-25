@@ -46,6 +46,7 @@ PImage Crowbar; //99
 PImage ShapeBox; //100
 PImage ShapePad; //101
 PImage CrowbarTile; //102
+PImage Etagère; //103
 
 //other
 PImage ExitArrow;
@@ -176,6 +177,7 @@ void setup(){
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
+  Etagère = loadImage("/Others/Table.png");
 
   Items[1] = loadImage("/Inventor/Items/Cable_yellow.png");
   Items[2] = loadImage("/Inventor/Items/Cable_red.png");
