@@ -173,6 +173,7 @@ void setup(){
   Cup = loadImage("EndAnimation/Cup.png");
   Crowbar = loadImage("Inventor/Items/Crowbar.png");
   ShapeBox = loadImage("/Object/Others/BoiteLock.png");
+  ShapePad = loadImage("/Object/Interactible/Lockpad_2.png");
   ShapePad = loadImage("/Object/Interactible/Lockpad_2");
   CrowbarTile = loadImage("/Others/CrowBar_Tile.png");
 
@@ -386,11 +387,11 @@ void Load(){
         case(80):
           if(Light){
             image(LampKey[1], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
+            AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 80);
           }
           else{
             image(LampKey[0], Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100);
           }
-          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 100, 100, 80);
         break;
 
         case(81):
@@ -405,11 +406,11 @@ void Load(){
         case(82):
           if(Light){
             image(Lever[1], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
-            AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
           }
           else{
             image(Lever[0], Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70);
           }
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 32, Elements[room][facing][i + 2] * 100 + 15, 35, 70, 82);
         break;
 
         case(83):
@@ -471,6 +472,11 @@ void Load(){
         case(95):
           image(LockBox2,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
+        break;
+
+        case(100):
+          image(ShapeBox,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100);
+          AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,100);
         break;
 
         default:
@@ -946,14 +952,14 @@ void OnHitbox(int id){
       default:
       break;
     }
-    int[] GoodCode = {4, 5, 3, 1};
+    int[] GoodShapeCode = {4, 5, 8, 2};
     for(int i = 0; i < 4; i++){
-      if(Code1[i] != GoodCode[i]){
+      if(Code2[i] != GoodShapeCode[i]){
         return;
       }
     }
-    CodeLock = false;
-    ChangeElementsById(95, 22);
+    ShapeCode = false;
+    ChangeElementsById(100, 99);
   }
   if(id <= 39 && id >= 20){
     InventoryAdd(id);
@@ -1058,6 +1064,10 @@ void OnHitbox(int id){
 
     case(95):
       CodeLock = true;
+    break;
+
+    case(100):
+      ShapeCode = true;
     break;
 
     default:
