@@ -479,6 +479,11 @@ void Load(){
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 137, 100,95);
         break;
 
+        case(98):
+          image(Cup,Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50);
+          AddHitbox(Elements[room][facing][i + 1] * 100 + 25, Elements[room][facing][i + 2] * 100 + 50, 50, 50, 98);
+        break;
+
         case(99):
           image(Crowbar,Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 120, 100);
           AddHitbox(Elements[room][facing][i + 1] * 100, Elements[room][facing][i + 2] * 100, 120, 100, 99);
@@ -1093,6 +1098,11 @@ void OnHitbox(int id){
 
     case(95):
       CodeLock = true;
+    break;
+
+    case(98):
+      ChangeElementsById(98, 0);
+      AnimationOn = true;
     break;
 
     case(99):
