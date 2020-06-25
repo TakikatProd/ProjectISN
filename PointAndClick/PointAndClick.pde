@@ -192,9 +192,11 @@ void setup(){
   Items[20] = loadImage("/Inventor/Items/Key_0.png");
   Items[21] = loadImage("/Inventor/Items/Key_1.png");
   Items[22] = loadImage("/Inventor/Items/Key_2.png");
+  Items[23] = loadImage("/Inventor/Items/Key_3.png");
   Key[0] = loadImage("/Inventor/Items/Key_0.png");
   Key[1] = loadImage("/Inventor/Items/Key_1.png");
   Key[2] = loadImage("/Inventor/Items/Key_2.png");
+  Key[3] = loadImage("/Inventor/Items/Key_3.png");
 
   ExitArrow = loadImage("/Others/Exit_Arrow.png");
   Ambiance = minim.loadFile("/Sounds/Music/Man Down.wav");
@@ -1083,6 +1085,16 @@ void OnHitbox(int id){
 
     case(100):
       ShapeCode = true;
+    break;
+
+    case(102):
+      if(SelectItem!=10){
+        if(Inventory[SelectItem] == 99){
+          Inventory[SelectItem] = 0;
+          InventoryAdd(23);
+          ChangeElementsById(102, 0);
+        }
+      }
     break;
 
     default:
