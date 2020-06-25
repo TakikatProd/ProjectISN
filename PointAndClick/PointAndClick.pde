@@ -1072,6 +1072,10 @@ void OnHitbox(int id){
       CodeLock = true;
     break;
 
+    case(99):
+      ChangeElementsById(99, 0);
+    break;
+
     case(100):
       ShapeCode = true;
     break;
