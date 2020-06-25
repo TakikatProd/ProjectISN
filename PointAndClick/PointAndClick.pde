@@ -263,6 +263,7 @@ void draw(){
     if(AnimationSequence == 14){
       delay(1000);
       image(Credit, 0, 0, 1600, 900);
+      AnimationOn = false;
     }
   }
 }
