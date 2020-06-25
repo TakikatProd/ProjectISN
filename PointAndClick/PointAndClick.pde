@@ -466,8 +466,8 @@ void Load(){
         break;
 
         case(94):
-          image(Gramophone,Elements[room][facing][i+1] * 100 - 15, Elements[room][facing][i+2] * 100 - 15, 125, 125);
-          AddHitbox(Elements[room][facing][i+1] * 100 - 15, Elements[room][facing][i+2] * 100 - 15, 125, 125, 94);
+          image(Gramophone,Elements[room][facing][i+1] * 100 - 5, Elements[room][facing][i+2] * 100 + 13, 100, 100);
+          AddHitbox(Elements[room][facing][i+1] * 100 - 5, Elements[room][facing][i+2] * 100 + 13, 125, 125, 94);
         break;
 
         case(95):
