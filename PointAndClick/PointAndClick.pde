@@ -57,6 +57,8 @@ PImage ExitGame;
 PImage MenuTitle;
 PImage MaskCable[] = new PImage[3];
 
+PImage Credit;
+
 //Special var
 boolean Light = false;
 boolean BlackLight = false;
@@ -261,14 +263,15 @@ void draw(){
     delay(100);
     AnimationSequence++;
     if(AnimationSequence == 14){
-      AnimationOn = false;
+      delay(1000);
+      image(Credit, 0, 0, 1600, 900);
     }
   }
 }
 
 void keyPressed(){
   //Mouvement
-  if(Menu || Tuto){
+  if(Menu || Tuto || AnimationOn){
     return;
   }
   if(keyCode == TAB){
@@ -1168,7 +1171,7 @@ void MenuPrint(){
   AddHitbox(600, 500, 400, 90, -2);
   image(ExitGame, 600, 650, 400, 90);
   AddHitbox(600, 650, 400, 90, -3);
-  image(MenuTitle, 500, 85, 600, 237);
+  image(MenuTitle, 389, 85, 822, 237);
 }
 
 void MenuNew(){
