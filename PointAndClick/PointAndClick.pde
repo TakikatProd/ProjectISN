@@ -83,7 +83,7 @@ char Note[] = new char[6];
 int NoteID = 0;
 
 //Tutorial
-PImage[] Tutorial = new PImage[3];
+PImage[] Tutorial = new PImage[4];
 
 //Inventaire
 int[] Inventory = new int[9];
@@ -146,6 +146,7 @@ void setup(){
   Tutorial[0] = loadImage("/Others/tuto1.png");
   Tutorial[1] = loadImage("/Others/tuto2.png");
   Tutorial[2] = loadImage("/Others/tuto3.png");
+  Tutorial[3] = loadImage("/Others/tuto4.png");
   LampKey[0] = loadImage("/Object/Others/Lamp/Lamp.png");
   LampKey[1] = loadImage("/Object/Others/Lamp/Lamp_On_key.png");
   Lamp[0] = LampKey[0];
